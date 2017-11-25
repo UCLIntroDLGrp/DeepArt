@@ -71,7 +71,7 @@ You can  pull the changes made a branch to your own branch. This will update you
 ## Workflow
 The branch master is the global branch shared by the whole group.  It should not be modified directly : Everyone works on their branch.
 The workflow could then be:
-- Pull master
+- Pull master (once in your branch just run ```git pull origin master```)
 - Commit and push changes on your named branch - This is your playground/ experimentation place / spaggeti land.
 - If something is complete and looks good enough to go on master.
 - Create a new branch  OFF MASTER with branchname the feature that you are adding (E.g. Transfer_Learing_on_VGG)
