@@ -53,12 +53,12 @@ Commits are basically saved versions of your code you can go back to and look, r
 super useful, but can lead to nightmares if you are new to git (they still make me nervous).
 I would recommend using them with caution, mostly
 Few useful commands:
-    - ```git log``` : shows all your past commits
-    - ``` git checkout COMMIT_HASH_FROM_GIT_LOG``` : Takes your code back to the state it was at this last commit- WATCH
-           OUT if you want to start working off this older code, can lead to headaches. I recommend using it more for comparison
-           and then going back to your latest commit and working from there.
-   - ``` git checkout YOUR_BRANCH_NAME``` : gets you back to latest commit.
-   - ```git diff COMMIT_HASH1 COMMIT_HASH2``` : shows the differences in the codes between those two commits
+- ```git log``` : shows all your past commits
+- ``` git checkout COMMIT_HASH_FROM_GIT_LOG``` : Takes your code back to the state it was at this last commit- WATCH
+       OUT if you want to start working off this older code, can lead to headaches. I recommend using it more for comparison
+       and then going back to your latest commit and working from there.
+- ``` git checkout YOUR_BRANCH_NAME``` : gets you back to latest commit.
+- ```git diff COMMIT_HASH1 COMMIT_HASH2``` : shows the differences in the codes between those two commits
 
 
 ## Pulling
