@@ -39,13 +39,13 @@ you merge with other people.
 
 ## Pushing changes on your branch to github:
 Once you made changes locally you are happy with:
-    - ```git status``` : shows the status of your files- which ones you changed, created, deleted ect since last commit.
-    - ```git add file_you_want_to_save```  or ```git add *```:  This stages the file for commit, still not sure why we do this but its
-        cool not to commit straight away. * means all changed files.
-    - ```git status``` : check which files have been stages for commit
-    - ```git commit -m "YOUR COMMIT MESSAGE"``` : Commit messages are a short phrase resuming what you changed since last commit.
-    - ``` git push``` : pushes your commit to github - DON'T push on the master branch, only on YOUR branch. Could ask you
-    for your github credentials, it is also possible to preset it and then it uses automatically - can't remember details anymore!
+- ```git status``` : shows the status of your files- which ones you changed, created, deleted ect since last commit.
+- ```git add file_you_want_to_save```  or ```git add *```:  This stages the file for commit, still not sure why we do this but its
+    cool not to commit straight away. * means all changed files.
+- ```git status``` : check which files have been stages for commit
+- ```git commit -m "YOUR COMMIT MESSAGE"``` : Commit messages are a short phrase resuming what you changed since last commit.
+- ``` git push``` : pushes your commit to github - DON'T push on the master branch, only on YOUR branch. Could ask you
+for your github credentials, it is also possible to preset it and then it uses automatically - can't remember details anymore!
 
 
 ## Commits
