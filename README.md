@@ -39,7 +39,7 @@ you merge with other people.
 
 ## Pushing changes on your branch to github:
 Once you made changes locally you are happy with:
-    -```git status``` : shows the status of your files- which ones you changed, created, deleted ect since last commit.
+    - ```git status``` : shows the status of your files- which ones you changed, created, deleted ect since last commit.
     - ```git add file_you_want_to_save```  or ```git add *```:  This stages the file for commit, still not sure why we do this but its
         cool not to commit straight away. * means all changed files.
     - ```git status``` : check which files have been stages for commit
