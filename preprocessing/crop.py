@@ -1,5 +1,8 @@
 import numpy as np
+import matplotlib.image as img
 import matplotlib.pyplot as plt
+
+from PIL import Image
 
 def crop_image(image, positions, crop_dimensions):
 	'''
@@ -10,6 +13,7 @@ def crop_image(image, positions, crop_dimensions):
 	Returns:
 		cropped_image: the newly cropped image
 	'''
+	image = np.array(image)
 	height, width = crop_dimensions
 	height_pos, width_pos = positions
 
@@ -25,6 +29,7 @@ def generate_random_crops(image, crop_dimensions, number_of_images):
 	Returns:
 		cropped_images: an array of cropped images from image.
 	'''
+	image = np.array(image)
 	image_height, image_width, _ = image.shape
 	crop_height, crop_width = crop_dimensions
 	
@@ -41,3 +46,15 @@ def generate_random_crops(image, crop_dimensions, number_of_images):
 		cropped_images.append(cropped_image)
 
 	return cropped_images
+
+def resize_image(image, scale):
+	'''
+	Arguments:
+		image: the image to be resized
+		scale: resizing scale factor
+	Returns: 
+		resized image: a scaled version of the original image
+	'''
+	height, width, _ = np.array(image).shape
+	resize_image = image.resize((width/scale, height/scale))
+	return resize_image
