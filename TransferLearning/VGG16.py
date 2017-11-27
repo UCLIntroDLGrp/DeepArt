@@ -20,7 +20,7 @@ from keras.optimizers import SGD
 from TransferLearning.load_cifar10 import load_cifar10_data
 from keras.models import Model
 from keras.layers import Flatten, Dense, Input
-from keras.layers import Convolution2D, MaxPooling2D
+from keras.layers import Conv2D, MaxPooling2D
 from keras.preprocessing import image
 from keras.utils.layer_utils import convert_all_kernels_in_model
 from keras.utils.data_utils import get_file
@@ -41,7 +41,7 @@ def VGG16(include_top=True, weights='imagenet',
     optionally loading weights pre-trained
     on ImageNet. Note that when using TensorFlow,
     for best performance you should set
-    `image_dim_ordering="tf"` in your Keras config
+   /ke `image_dim_ordering="tf"` in your Keras config
     at ~/.keras/keras.json.
 
     The model and the weights are compatible with both
@@ -84,31 +84,31 @@ def VGG16(include_top=True, weights='imagenet',
         else:
             img_input = input_tensor
     # Block 1
-    x = Convolution2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv1')(img_input)
-    x = Convolution2D(64, 3, 3, activation='relu', border_mode='same', name='block1_conv2')(x)
+    x = Conv2D(64, (3, 3), activation='relu', border_mode='same', name='block1_conv1')(img_input)
+    x = Conv2D(64, (3, 3), activation='relu', border_mode='same', name='block1_conv2')(x)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool')(x)
 
     # Block 2
-    x = Convolution2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv1')(x)
-    x = Convolution2D(128, 3, 3, activation='relu', border_mode='same', name='block2_conv2')(x)
+    x = Conv2D(128, (3, 3),activation='relu', border_mode='same', name='block2_conv1')(x)
+    x = Conv2D(128, (3, 3),activation='relu', border_mode='same', name='block2_conv2')(x)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool')(x)
 
     # Block 3
-    x = Convolution2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv1')(x)
-    x = Convolution2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv2')(x)
-    x = Convolution2D(256, 3, 3, activation='relu', border_mode='same', name='block3_conv3')(x)
+    x = Conv2D(256, (3, 3),activation='relu', border_mode='same', name='block3_conv1')(x)
+    x = Conv2D(256, (3, 3),activation='relu', border_mode='same', name='block3_conv2')(x)
+    x = Conv2D(256, (3, 3),activation='relu', border_mode='same', name='block3_conv3')(x)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool')(x)
 
     # Block 4
-    x = Convolution2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv1')(x)
-    x = Convolution2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv2')(x)
-    x = Convolution2D(512, 3, 3, activation='relu', border_mode='same', name='block4_conv3')(x)
+    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block4_conv1')(x)
+    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block4_conv2')(x)
+    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block4_conv3')(x)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block4_pool')(x)
 
     # Block 5
-    x = Convolution2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv1')(x)
-    x = Convolution2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv2')(x)
-    x = Convolution2D(512, 3, 3, activation='relu', border_mode='same', name='block5_conv3')(x)
+    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block5_conv1')(x)
+    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block5_conv2')(x)
+    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block5_conv3')(x)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool')(x)
 
     if include_top:
@@ -155,59 +155,3 @@ def VGG16(include_top=True, weights='imagenet',
 
 if __name__ == '__main__':
     model = VGG16(include_top=True, weights='imagenet')
-
-    model.summary()
-    num_classes = 10
-    model.layers.pop()
-    model.summary()
-    #model.outputs = [model.layers[-1].output]
-    #model.layers[-1].outbound_nodes = []
-
-    x = Dense(num_classes, activation='softmax', name='output_predictions')(model.layers[-1].output)
-    img_input = Input(shape=(224,224,3))
-    model2 = Model(input=model.input, output=[x])
-    model2.summary()
-
-
-    for layer in model2.layers[:-1]:
-        layer.trainable = False
-
-    img_rows, img_cols = 224, 224 # Resolution of inputs
-    channel = 3
-    num_classes = 10
-    batch_size = 16
-    nb_epoch = 3
-
-    X_train, Y_train, X_valid, Y_valid = load_cifar10_data(img_rows, img_cols)
-    sgd = SGD(lr=1e-3, decay=1e-6, momentum=0.9, nesterov=True)
-    model2.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=['accuracy'])
-
-    X_train_new = X_train[:100,:,:,:]
-    Y_train_new = Y_train[:100, :]
-    X_valid_new = X_valid[:30,:,:,:]
-    Y_valid_new = Y_valid[:30, :]
-    model2.fit(X_train_new, Y_train_new,
-              batch_size=batch_size,
-              nb_epoch=nb_epoch,
-              shuffle=True,
-              verbose=1,
-              validation_data=(X_valid_new, Y_valid_new),
-              )
-
-
-    # Make predictions
-    predictions_valid = model2.predict(X_valid, batch_size=batch_size, verbose=1)
-
-    # Cross-entropy loss score
-    score = log_loss(Y_valid, predictions_valid)
-    print(score)
-
-   # img_path = 'elephant.jpg'
-    #img = image.load_img(img_path, target_size=(224, 224))
-   # x = image.img_to_array(img)
-    #x = np.expand_dims(x, axis=0)
-    #x = preprocess_input(x)
-    #print('Input image shape:', x.shape)
-
-    #preds = model.predict(x)
-    #print('Predicted:', decode_predictions(preds))
