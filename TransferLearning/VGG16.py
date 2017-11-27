@@ -14,41 +14,22 @@
 '''
 from __future__ import print_function
 
-import numpy as np
 import warnings
-from keras.optimizers import SGD
-from TransferLearning.load_cifar10 import load_cifar10_data
 from keras.models import Model
 from keras.layers import Flatten, Dense, Input
 from keras.layers import Conv2D, MaxPooling2D
-from keras.preprocessing import image
 from keras.utils.layer_utils import convert_all_kernels_in_model
-from keras.utils.data_utils import get_file
 from keras import backend as K
-from sklearn.metrics import log_loss
-#from imagenet_utils import decode_predictions, preprocess_input
 
-
-TH_WEIGHTS_PATH = '../PretrainedWeights/vgg16_weights_th_dim_ordering_th_kernels.h5'
 TF_WEIGHTS_PATH = '../PretrainedWeights/vgg16_weights_tf_dim_ordering_tf_kernels.h5'
-TH_WEIGHTS_PATH_NO_TOP = '../PretrainedWeights/vgg16_weights_th_dim_ordering_th_kernels_notop.h5'
 TF_WEIGHTS_PATH_NO_TOP = '../PretrainedWeights/vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5'
 
 
-def VGG16(include_top=True, weights='imagenet',
+def VGG16(include_top=True, weights=None,
           input_tensor=None):
     '''Instantiate the VGG16 architecture,
     optionally loading weights pre-trained
-    on ImageNet. Note that when using TensorFlow,
-    for best performance you should set
-   /ke `image_dim_ordering="tf"` in your Keras config
-    at ~/.keras/keras.json.
-
-    The model and the weights are compatible with both
-    TensorFlow and Theano. The dimension ordering
-    convention used by the model is the one
-    specified in your Keras config file.
-
+    on ImageNet. 
     # Arguments
         include_top: whether to include the 3 fully-connected
             layers at the top of the network.
@@ -65,16 +46,10 @@ def VGG16(include_top=True, weights='imagenet',
                          '`None` (random initialization) or `imagenet` '
                          '(pre-training on ImageNet).')
     # Determine proper input shape
-    if K.image_dim_ordering() == 'th':
-        if include_top:
-            input_shape = (3, 224, 224)
-        else:
-            input_shape = (3, None, None)
+    if include_top:
+        input_shape = (224, 224, 3)
     else:
-        if include_top:
-            input_shape = (224, 224, 3)
-        else:
-            input_shape = (None, None, 3)
+        input_shape = (None, None, 3)
 
     if input_tensor is None:
         img_input = Input(shape=input_shape)
@@ -84,31 +59,31 @@ def VGG16(include_top=True, weights='imagenet',
         else:
             img_input = input_tensor
     # Block 1
-    x = Conv2D(64, (3, 3), activation='relu', border_mode='same', name='block1_conv1')(img_input)
-    x = Conv2D(64, (3, 3), activation='relu', border_mode='same', name='block1_conv2')(x)
+    x = Conv2D(64, (3, 3), activation="relu", name="block1_conv1", padding="same")(img_input)
+    x = Conv2D(64, (3, 3), activation="relu", name="block1_conv2", padding="same")(x)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool')(x)
 
     # Block 2
-    x = Conv2D(128, (3, 3),activation='relu', border_mode='same', name='block2_conv1')(x)
-    x = Conv2D(128, (3, 3),activation='relu', border_mode='same', name='block2_conv2')(x)
+    x = Conv2D(128, (3, 3), activation="relu", name="block2_conv1", padding="same")(x)
+    x = Conv2D(128, (3, 3), activation="relu", name="block2_conv2", padding="same")(x)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool')(x)
 
     # Block 3
-    x = Conv2D(256, (3, 3),activation='relu', border_mode='same', name='block3_conv1')(x)
-    x = Conv2D(256, (3, 3),activation='relu', border_mode='same', name='block3_conv2')(x)
-    x = Conv2D(256, (3, 3),activation='relu', border_mode='same', name='block3_conv3')(x)
+    x = Conv2D(256, (3, 3), activation="relu", name="block3_conv1", padding="same")(x)
+    x = Conv2D(256, (3, 3), activation="relu", name="block3_conv2", padding="same")(x)
+    x = Conv2D(256, (3, 3), activation="relu", name="block3_conv3", padding="same")(x)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool')(x)
 
     # Block 4
-    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block4_conv1')(x)
-    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block4_conv2')(x)
-    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block4_conv3')(x)
+    x = Conv2D(512, (3, 3), activation="relu", name="block4_conv1", padding="same")(x)
+    x = Conv2D(512, (3, 3), activation="relu", name="block4_conv2", padding="same")(x)
+    x = Conv2D(512, (3, 3), activation="relu", name="block4_conv3", padding="same")(x)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block4_pool')(x)
 
     # Block 5
-    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block5_conv1')(x)
-    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block5_conv2')(x)
-    x = Conv2D(512, (3, 3),activation='relu', border_mode='same', name='block5_conv3')(x)
+    x = Conv2D(512, (3, 3), activation="relu", name="block5_conv1", padding="same")(x)
+    x = Conv2D(512, (3, 3), activation="relu", name="block5_conv2", padding="same")(x)
+    x = Conv2D(512, (3, 3), activation="relu", name="block5_conv3", padding="same")(x)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool')(x)
 
     if include_top:
@@ -123,32 +98,11 @@ def VGG16(include_top=True, weights='imagenet',
 
     # load weights
     if weights == 'imagenet':
-        print('K.image_dim_ordering:', K.image_dim_ordering())
-        if K.image_dim_ordering() == 'th':
-            if include_top:
-                weights_path =  TH_WEIGHTS_PATH
-            else:
-                weights_path = TH_WEIGHTS_PATH_NO_TOP
-            model.load_weights(weights_path)
-            if K.backend() == 'tensorflow':
-                warnings.warn('You are using the TensorFlow backend, yet you '
-                              'are using the Theano '
-                              'image dimension ordering convention '
-                              '(`image_dim_ordering="th"`). '
-                              'For best performance, set '
-                              '`image_dim_ordering="tf"` in '
-                              'your Keras config '
-                              'at ~/.keras/keras.json.')
-                convert_all_kernels_in_model(model)
+        if include_top:
+            weights_path = TF_WEIGHTS_PATH
         else:
-            if include_top:
-                weights_path = TF_WEIGHTS_PATH
-            else:
-                weights_path = TF_WEIGHTS_PATH_NO_TOP
-            model.load_weights(weights_path)
-            if K.backend() == 'theano':
-                convert_all_kernels_in_model(model)
-
+            weights_path = TF_WEIGHTS_PATH_NO_TOP
+        model.load_weights(weights_path)
 
     return model
 
