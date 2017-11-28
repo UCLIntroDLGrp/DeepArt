@@ -98,6 +98,24 @@ def load_images(directory_path):
 	
 	return images, labels
 
+def one_hot_encoding(labels):
+	'''
+	Arguments:
+		labels: an array of all the labels
+	Returns:
+		one_hot_encoded_labels: an array of all the one hot encoded labels
+	'''
+	labels_set = list(set(labels))
+	one_hot_encoded_labels = []
+	for label in labels:
+		label_index = labels_set.index(label)
+
+		vec = np.zeros((len(labels_set), 1))
+		vec[label_index, 0] = 1
+		one_hot_encoded_labels.append(vec)
+
+	return np.array(one_hot_encoded_labels)
+
 def load_cropped_images(directory_path, crop_dimensions, number_of_crops):
 	'''
 	Arguments:
@@ -117,6 +135,10 @@ def load_cropped_images(directory_path, crop_dimensions, number_of_crops):
 		for crop in cropped:
 			cropped_images.append(crop)
 			cropped_labels.append(label)
+
+	label_set = set(cropped_labels)
+
+	cropped_labels = one_hot_encoding(cropped_labels)
 
 	return cropped_images, cropped_labels
 
@@ -139,4 +161,4 @@ def generate_training_and_testing_data(directory_path, crop_dimensions, number_o
 	X_train, X_test, y_train, y_test = train_test_split(images, labels, test_size=test_size, train_size=train_size)
 
 	return X_train, X_test, y_train, y_test
-
+	
