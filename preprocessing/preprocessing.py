@@ -1,13 +1,13 @@
 import numpy as np
-import matplotlib.image as img
-import matplotlib.pyplot as plt
+#import matplotlib.image as img
+#import matplotlib.pyplot as plt
 import os 
 from sklearn.model_selection import  train_test_split
 from PIL import Image
 
 def crop_image(image, positions, crop_dimensions):
 	'''
-	Arguments: 
+	Arguments:
 		image: the image to be cropped
 		positions: the x and y positions of the top left cropping window
 		crop_dimensions: the dimensions of the cropping window

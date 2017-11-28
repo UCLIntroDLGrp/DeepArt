@@ -20,8 +20,8 @@ from keras.layers import Flatten, Dense, Input
 from keras.layers import Conv2D, MaxPooling2D
 from keras import backend as K
 
-TF_WEIGHTS_PATH = '../PretrainedWeights/vgg16_weights_tf_dim_ordering_tf_kernels.h5'
-TF_WEIGHTS_PATH_NO_TOP = '../PretrainedWeights/vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5'
+TF_WEIGHTS_PATH = '../pretrainedWeights/vgg16_weights_tf_dim_ordering_tf_kernels.h5'
+TF_WEIGHTS_PATH_NO_TOP = '../pretrainedWeights/vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5'
 
 
 def VGG16(include_top=True, weights=None,
