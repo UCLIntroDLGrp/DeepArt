@@ -1,5 +1,4 @@
 
-
 def selectData(data, nb):
     '''
     Select the first nb examples of the data. Only use for debugging

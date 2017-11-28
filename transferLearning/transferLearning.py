@@ -72,4 +72,3 @@ def fineTune(model,batch_size, nb_epoch,optimizer,loss,
                )
 
     return model
-
