@@ -3,6 +3,7 @@ from keras.optimizers import SGD
 from sklearn.metrics import log_loss
 from TransferLearning.transferLearningUtilities import refactorOutputs,setTrainableLayers,fineTune
 from TransferLearning.load_cifar10 import load_cifar10_data
+from InvestigatingModels.LayerExplorer import get_activations, display_activations
 
 if __name__ == '__main__':
 
@@ -27,9 +28,12 @@ if __name__ == '__main__':
     Y_valid_new = Y_valid[:30, :]
 
     #Do the transfer learning
-    model = refactorOutputs(model,num_classes,True)
-    model = setTrainableLayers(model,1)
-    model = fineTune(model,batch_size,nb_epoch,sgd,loss,metrics,X_train_new,Y_train_new,X_valid_new,Y_valid_new,True)
+    #model = refactorOutputs(model,num_classes,True)
+    #model = setTrainableLayers(model,1)
+    #model = fineTune(model,batch_size,nb_epoch,sgd,loss,metrics,X_train_new,Y_train_new,X_valid_new,Y_valid_new,True)
+
+    act = get_activations(model,X_valid[0:1],print_shape_only=True,layer_name="block1_conv1")
+    display_activations(act)
 
     # Make predictions
     predictions_valid = model.predict(X_valid_new, batch_size=batch_size, verbose=1)

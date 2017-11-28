@@ -14,11 +14,10 @@
 '''
 from __future__ import print_function
 
-import warnings
+
 from keras.models import Model
 from keras.layers import Flatten, Dense, Input
 from keras.layers import Conv2D, MaxPooling2D
-from keras.utils.layer_utils import convert_all_kernels_in_model
 from keras import backend as K
 
 TF_WEIGHTS_PATH = '../PretrainedWeights/vgg16_weights_tf_dim_ordering_tf_kernels.h5'
@@ -29,7 +28,7 @@ def VGG16(include_top=True, weights=None,
           input_tensor=None):
     '''Instantiate the VGG16 architecture,
     optionally loading weights pre-trained
-    on ImageNet. 
+    on ImageNet.
     # Arguments
         include_top: whether to include the 3 fully-connected
             layers at the top of the network.
