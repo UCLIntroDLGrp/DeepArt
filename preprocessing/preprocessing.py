@@ -140,7 +140,7 @@ def load_cropped_images(directory_path, crop_dimensions, number_of_crops):
 
 	cropped_labels = one_hot_encoding(cropped_labels)
 
-	return np.array(cropped_images), np.array(cropped_labels)
+	return np.array(cropped_images), np.array(cropped_labels).reshape(-1, len(label_set))
 
 def generate_training_and_testing_data(directory_path, crop_dimensions, number_of_crops, test_size, train_size):
 	'''
