@@ -14,7 +14,7 @@ if __name__ == '__main__':
     number_of_crops = 1
     test_size = 1 / 3
     train_size = 2 / 3
-    X_train, X_test, y_train, y_test = generate_training_and_testing_data(directory, crop_dims,
+    X_train, X_test, Y_train, Y_test = generate_training_and_testing_data(directory, crop_dims,
                                                                           number_of_crops, test_size, train_size)
 
     #Select only few training examples - uncomment for quick testing
