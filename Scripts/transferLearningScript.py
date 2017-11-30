@@ -4,6 +4,7 @@ import os
 sys.path.insert(0, os.path.realpath('../'))
 
 from TransferLearning.VGG16 import VGG16
+import numpy as np
 from keras.optimizers import SGD
 from sklearn.metrics import f1_score, log_loss
 from TransferLearning.transferLearning import refactorOutputs,setTrainableLayers,fineTune
@@ -21,14 +22,14 @@ if __name__ == '__main__':
                                                                           number_of_crops, test_size, train_size)
 
     #Select only few training examples - uncomment for quick testing
-    #X_train= selectData(X_train,50)
-    #Y_train = selectData(y_train,50)
-    #X_test = selectData(X_test,20)
-    #Y_test = selectData(y_test,20)
+    X_train= selectData(X_train,30)
+    Y_train = selectData(Y_train,30)
+    X_test = selectData(X_test,10)
+    Y_test = selectData(Y_test,10)
 
     #Hyperparameters
     batch_size = 10
-    nb_epoch = 1
+    nb_epoch = 50
     num_classes=8
     loss = 'categorical_crossentropy'
     metrics = ['accuracy']
@@ -52,9 +53,9 @@ if __name__ == '__main__':
     collapsed_predictions = collapseVectors(predictions_valid)
     score = f1_score(Y_test, collapsed_predictions, average='macro')
 
-    arr = [1 if y == x else 0 for y, x in zip(Y_test,collapsed_predictions) ]
-    print("accuracy")
-    print(sum(arr)/len(Y_test))
+    #arr = [1 if np.array_equal(x,y) else 0 for y, x in zip(Y_test,collapsed_predictions) ]
+    #print("accuracy")
+    #print(sum(arr)/len(Y_test))
 
     print(log_loss)
     print(score)
