@@ -4,7 +4,7 @@ from TransferLearning.VGG16 import VGG16
 from keras.optimizers import SGD
 from sklearn.metrics import f1_score, log_loss
 from TransferLearning.transferLearning import refactorOutputs,setTrainableLayers,fineTune
-from preprocessing.preprocessing import generate_training_and_testing_data
+from Preprocessing.preprocessing import generate_training_and_testing_data
 from Utilities.utilities import selectData, collapseVectors
 
 if __name__ == '__main__':
