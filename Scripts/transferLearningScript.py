@@ -51,5 +51,10 @@ if __name__ == '__main__':
     log_loss = log_loss(Y_test, predictions_valid)
     collapsed_predictions = collapseVectors(predictions_valid)
     score = f1_score(Y_test, collapsed_predictions, average='macro')
+
+    arr = [1 if y == x else 0 for y, x in zip(Y_test,collapsed_predictions) ]
+    print("accuracy")
+    print(sum(arr)/len(Y_test))
+
     print(log_loss)
     print(score)
