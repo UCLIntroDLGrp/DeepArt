@@ -114,48 +114,40 @@ def one_hot_encoding(labels):
 
 	return one_hot_encoded_labels
 
-def load_cropped_images(directory_path, crop_dimensions, number_of_crops):
-	'''
-	Arguments:
-		directory_path: the path for where image directories exist
-		crop_dimensions: the dimensions of the cropping window
-		number_of_crops: the number of crops to be produced from the image
-	Returns:
-		cropped_images: an array of cropped images
-		cropped_labels: an array of corresponding genres
-	'''
+def generate_training_and_test_data(directory_path, test_size, train_size):
 	images, labels = load_images(directory_path)
-	cropped_images = []
-	cropped_labels = []
-
-	for image, label in zip(images, labels):
-		cropped = generate_random_crops(image, crop_dimensions, number_of_crops)
-		for crop in cropped:
-			cropped_images.append(crop)
-			cropped_labels.append(label)
-
-	label_set = set(cropped_labels)
-
-	cropped_labels = one_hot_encoding(cropped_labels)
-
-	return np.array(cropped_images), np.array(cropped_labels).reshape(-1, len(label_set))
-
-def generate_training_and_testing_data(directory_path, crop_dimensions, number_of_crops, test_size, train_size):
-	'''
-	Arguments:
-		directory_path: the path for where image directories exist
-		crop_dimensions: the dimensions of the cropping window
-		number_of_crops: the number of crops to be produced from the image
-		test_size: test set proportion
-		train_size: train set proportion
-	Returns:
-		X_train: X training data
-		X_test: X testing data
-		y_train: y training data
-		y_test: y testing data
-	'''
-	images, labels = load_cropped_images(directory_path, crop_dimensions, number_of_crops)
+	labels = one_hot_encoding(labels)
 
 	X_train, X_test, y_train, y_test = train_test_split(images, labels, test_size=test_size, train_size=train_size)
-
 	return X_train, X_test, y_train, y_test
+
+def generate_cropped_training_and_test_data(directory_path, crop_dimensions, number_of_crops, test_size, train_size):
+	'''
+	Arguments:
+		directory_path: the path for where image directories exist
+		crop_dimensions: the dimensions of the cropping window
+		number_of_crops: the number of crops to be produced from the image
+		test_size: testing proportion
+		train_size: training proportion
+	Returns:
+		X_train, X_test, y_train, y_test (cropped)
+	'''
+	X_train, X_test, y_train, y_test = generate_training_and_test_data(directory_path, test_size, train_size)
+	cropped_images_train = []
+	cropped_labels_train = []
+	cropped_images_test = []
+	cropped_labels_test = []
+
+	for image, label in zip(X_train, y_train):
+		cropped = generate_random_crops(image, crop_dimensions, number_of_crops)
+		for crop in cropped:
+			cropped_images_train.append(crop)
+			cropped_labels_train.append(label)
+
+	for image, label in zip(X_test, y_test):
+		cropped = generate_random_crops(image, crop_dimensions, number_of_crops)
+		for crop in cropped:
+			cropped_images_test.append(crop)
+			cropped_labels_test.append(label)
+
+	return np.array(cropped_images_train), np.array(cropped_images_test), np.array(cropped_labels_train).reshape(-1, 8), np.array(cropped_labels_test).reshape(-1, 8)
