@@ -22,10 +22,10 @@ if __name__ == '__main__':
                                                                           number_of_crops, test_size, train_size)
 
     #Select only few training examples - uncomment for quick testing
-    X_train= selectData(X_train,30)
-    Y_train = selectData(Y_train,30)
-    X_test = selectData(X_test,10)
-    Y_test = selectData(Y_test,10)
+   # X_train= selectData(X_train,30)
+    #Y_train = selectData(Y_train,30)
+    #X_test = selectData(X_test,10)
+    #Y_test = selectData(Y_test,10)
 
     #Hyperparameters
     batch_size = 10
