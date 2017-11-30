@@ -1,20 +1,20 @@
 # An example transfer learning script
 
-from transferLearning.VGG16 import VGG16
+from TransferLearning.VGG16 import VGG16
 from keras.optimizers import SGD
 from sklearn.metrics import f1_score, log_loss
-from transferLearning.transferLearning import refactorOutputs,setTrainableLayers,fineTune
+from TransferLearning.transferLearning import refactorOutputs,setTrainableLayers,fineTune
 from preprocessing.preprocessing import generate_training_and_testing_data
-from utilities.utilities import selectData, collapseVectors
+from Utilities.utilities import selectData, collapseVectors
 
 if __name__ == '__main__':
     #Get the data:
     crop_dims = (224, 224)
     directory = "../Art_Data_sm"
     number_of_crops = 1
-    test_size = 1 / 3
-    train_size = 2 / 3
-    X_train, X_test, y_train, y_test = generate_training_and_testing_data(directory, crop_dims,
+    test_size = 1.0 / 3
+    train_size = 2.0 / 3
+    X_train, X_test, Y_train, Y_test = generate_training_and_testing_data(directory, crop_dims,
                                                                           number_of_crops, test_size, train_size)
 
     #Select only few training examples - uncomment for quick testing
