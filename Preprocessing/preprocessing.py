@@ -1,6 +1,4 @@
 import numpy as np
-import matplotlib.image as img
-import matplotlib.pyplot as plt
 import os 
 from sklearn.model_selection import  train_test_split
 from PIL import Image
