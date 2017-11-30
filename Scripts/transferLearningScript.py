@@ -15,7 +15,7 @@ if __name__ == '__main__':
     #Get the data:
     crop_dims = (224, 224)
     directory = "../Art_Data_sm"
-    number_of_crops = 1
+    number_of_crops = 10
     test_size = 1.0 / 3
     train_size = 2.0 / 3
     X_train, X_test, Y_train, Y_test = generate_cropped_training_and_test_data(directory, crop_dims,
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     #Hyperparameters
     batch_size = 10
-    nb_epoch = 50
+    nb_epoch = 20
     num_classes=8
     loss = 'categorical_crossentropy'
     metrics = ['accuracy']
@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
     #Do the transfer learning
     model = refactorOutputs(model,num_classes,True)
-    model = setTrainableLayers(model,1)
+    model = setTrainableLayers(model,3)
     model = fineTune(model,batch_size,nb_epoch,sgd,loss,metrics,X_train,Y_train,X_test,Y_test,True)
 
     # Make predictions
