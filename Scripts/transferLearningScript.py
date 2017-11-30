@@ -1,10 +1,13 @@
 # An example transfer learning script
+import sys
+import os
+sys.path.insert(0, os.path.realpath('../'))
 
 from TransferLearning.VGG16 import VGG16
 from keras.optimizers import SGD
 from sklearn.metrics import f1_score, log_loss
 from TransferLearning.transferLearning import refactorOutputs,setTrainableLayers,fineTune
-from Preprocessing.preprocessing import generate_training_and_testing_data
+from Preprocessing.preprocessing import generate_cropped_training_and_test_data
 from Utilities.utilities import selectData, collapseVectors
 
 if __name__ == '__main__':
@@ -14,7 +17,7 @@ if __name__ == '__main__':
     number_of_crops = 1
     test_size = 1.0 / 3
     train_size = 2.0 / 3
-    X_train, X_test, Y_train, Y_test = generate_training_and_testing_data(directory, crop_dims,
+    X_train, X_test, Y_train, Y_test = generate_cropped_training_and_test_data(directory, crop_dims,
                                                                           number_of_crops, test_size, train_size)
 
     #Select only few training examples - uncomment for quick testing
