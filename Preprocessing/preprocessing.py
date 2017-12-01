@@ -1,6 +1,7 @@
 import numpy as np
 import os
 from sklearn.model_selection import train_test_split
+from skimage.transform import resize
 from PIL import Image
 
 
@@ -61,6 +62,9 @@ def resize_image(image, scale):
     resize_image = image.resize((width / scale, height / scale))
     return resize_image
 
+
+def resize_to_minimum(image, minimum_dimensions):
+    return resize(image, minimum_dimensions)
 
 def read_directory(directory_path):
     '''
@@ -167,6 +171,19 @@ def select_images_of_similar_size(directory, percent, print_me=False):
 
     return images_out, labels_out
 
+def generate_images_of_same_size(directory, percent):
+    images, labels = select_images_of_similar_size(directory, 10)
+    
+    smallest_height = sorted(list(map(lambda x: x.shape, images)), key=lambda z: z[0])[0][0]
+    smallest_width = sorted(list(map(lambda x: x.shape, images)), key=lambda z: z[1])[0][1]
+    
+    smallest_dimension = (smallest_height, smallest_width)
+    
+    scaled_images = []
+    for image in images:
+        scaled_images.append(resize_to_minimum(image, smallest_dimension))
+
+    return scaled_images, labels
 
 def one_hot_encoding(labels):
     '''
@@ -187,13 +204,16 @@ def one_hot_encoding(labels):
     return one_hot_encoded_labels
 
 
-def generate_training_and_test_data(directory_path, test_size, train_size, image_selection_percent):
-    images, labels = select_images_of_similar_size(directory_path, percent=image_selection_percent)
-    labels = one_hot_encoding(labels)
+def generate_training_and_test_data(directory_path, test_size, train_size, image_selection_percent, same_size=False):
+    if(same_size):
+        images, labels = generate_images_of_same_size(directory_path, percent=image_selection_percent)
+    else:
+        images, labels = select_images_of_similar_size(directory_path, percent=image_selection_percent)
+
+    labels = np.array(one_hot_encoding(labels)).reshape(-1, 8)
 
     X_train, X_test, y_train, y_test = train_test_split(images, labels, test_size=test_size, train_size=train_size)
-    return X_train, X_test, y_train, y_test
-
+    return np.array(X_train), np.array(X_test), y_train, y_test
 
 def generate_cropped_training_and_test_data(directory_path, crop_dimensions, number_of_crops, test_size, train_size,
                                             image_selection_percent=10):
@@ -226,6 +246,4 @@ def generate_cropped_training_and_test_data(directory_path, crop_dimensions, num
             cropped_images_test.append(crop)
             cropped_labels_test.append(label)
 
-    return np.array(cropped_images_train), np.array(cropped_images_test), np.array(cropped_labels_train).reshape(-1,
-                                                                                                                 8), np.array(
-        cropped_labels_test).reshape(-1, 8)
+    return np.array(cropped_images_train), np.array(cropped_images_test), np.array(cropped_labels_train).reshape(-1, 8), np.array(cropped_labels_test).reshape(-1, 8)
