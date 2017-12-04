@@ -3,13 +3,13 @@ import sys
 import os
 sys.path.insert(0, os.path.realpath('../'))
 
-from TransferLearning.VGG16 import VGG16
-import numpy as np
-from keras.optimizers import SGD
+from keras.optimizers import Adam
 from sklearn.metrics import f1_score, log_loss
 from TransferLearning.transferLearning import refactorOutputs,setTrainableLayers,fineTune
 from Preprocessing.preprocessing import generate_cropped_training_and_test_data
 from Utilities.utilities import selectData, collapseVectors
+from keras.applications.vgg16 import VGG16
+
 
 if __name__ == '__main__':
     #Get the data:
@@ -22,14 +22,14 @@ if __name__ == '__main__':
                                                                           number_of_crops, test_size, train_size)
 
     #Select only few training examples - uncomment for quick testing
-   # X_train= selectData(X_train,30)
-    #Y_train = selectData(Y_train,30)
-    #X_test = selectData(X_test,10)
-    #Y_test = selectData(Y_test,10)
+    X_train= selectData(X_train,30)
+    Y_train = selectData(Y_train,30)
+    X_test = selectData(X_test,10)
+    Y_test = selectData(Y_test,10)
 
     #Hyperparameters
     batch_size = 10
-    nb_epoch = 20
+    nb_epoch = 2
     num_classes=8
     loss = 'categorical_crossentropy'
     metrics = ['accuracy']
@@ -37,13 +37,14 @@ if __name__ == '__main__':
 
     #Model on imagenet and optimizer instantiation
     model = VGG16(include_top=True, weights='imagenet')
-    sgd = SGD(lr=1e-3, decay=1e-6, momentum=0.9, nesterov=True)
+    model.summary()
+    opt = Adam()
 
 
     #Do the transfer learning
     model = refactorOutputs(model,num_classes,True)
     model = setTrainableLayers(model,3)
-    model = fineTune(model,batch_size,nb_epoch,sgd,loss,metrics,X_train,Y_train,X_test,Y_test,True)
+    model = fineTune(model,batch_size,nb_epoch,opt,loss,metrics,X_train,Y_train,X_test,Y_test,True)
 
     # Make predictions
     predictions_valid = model.predict(X_test, batch_size=batch_size, verbose=1)
@@ -53,9 +54,6 @@ if __name__ == '__main__':
     collapsed_predictions = collapseVectors(predictions_valid)
     score = f1_score(Y_test, collapsed_predictions, average='macro')
 
-    #arr = [1 if np.array_equal(x,y) else 0 for y, x in zip(Y_test,collapsed_predictions) ]
-    #print("accuracy")
-    #print(sum(arr)/len(Y_test))
 
     print(log_loss)
     print(score)
