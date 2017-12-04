@@ -10,6 +10,9 @@ from sklearn.metrics import f1_score, log_loss
 from TransferLearning.transferLearning import refactorOutputs,setTrainableLayers,fineTune
 from Preprocessing.preprocessing import generate_cropped_training_and_test_data
 from Utilities.utilities import selectData, collapseVectors
+from vis.visualization import visualize_saliency, visualize_activation
+from PIL import Image
+from vis.utils import utils
 
 if __name__ == '__main__':
     #Get the data:
@@ -38,6 +41,20 @@ if __name__ == '__main__':
     #Model on imagenet and optimizer instantiation
     model = VGG16(include_top=True, weights='imagenet')
     sgd = SGD(lr=1e-3, decay=1e-6, momentum=0.9, nesterov=True)
+
+    layer_index = utils.find_layer_idx(model,'block5_conv3')
+    print(layer_index)
+    ret = visualize_activation(model,layer_index,[27], X_test[1,:,:,:]);
+
+    img = Image.fromarray(ret, 'RGB')
+    img.show()
+
+    ret2 = visualize_saliency(model, layer_index, [27], X_test[1, :, :, :]);
+
+    img2 = Image.fromarray(ret2, 'RGB')
+    img2.show()
+
+
 
 
     #Do the transfer learning
