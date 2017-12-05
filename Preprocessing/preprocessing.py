@@ -75,14 +75,15 @@ def read_directory(directory_path):
                           of image names as values.
     '''
     get_dir_names = os.listdir(directory_path)
+    list_of_directories = ['Art_Nouveau_Modern', 'Baroque', 'Cubism', 'Expressionism', 'Impressionism', 'Pointillism', 'Realism', 'Romantism']
+    filter_dir_names = filter(lambda x: x in list_of_directories, get_dir_names)
 
     class_dictionary = dict()
 
-    for directory in get_dir_names:
+    for directory in filter_dir_names:
         class_dictionary[directory] = os.listdir(directory_path + "/" + directory)
 
     return class_dictionary
-
 
 def load_images(directory_path):
     '''
@@ -92,13 +93,9 @@ def load_images(directory_path):
         images: an array of all the art images
         label: the genre corresponding to each image
     '''
-    class_dictionary = read_directory(directory_path) # CLASS_NAMES =["blah" "blahblah".....]
+    class_dictionary = read_directory(directory_path)
     images = []
     labels = []
-
-    #for subdir in CLASS_NAMES:
-    #dict = read_directory(directort_path+subdir)
-    #
 
     for key, value in zip(class_dictionary.keys(), class_dictionary.values()):
         for image_name in value:
