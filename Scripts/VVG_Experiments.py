@@ -34,7 +34,7 @@ from keras.applications.vgg16 import VGG16
 if __name__ == '__main__':
     # Get the data:
     crop_dims = (224, 224)
-    directory = "../Art_Data_sm"
+    directory = "../wikiart"
     number_of_crops = 4
     validation_size = 10.0 / 100
     train_size = 80.0 / 100
@@ -45,27 +45,45 @@ if __name__ == '__main__':
                                                                                train_size,
                                                                                10)
 
-    print(X_train.shape)
-    print(Y_train.shape)
-    print(X_validation.shape)
-    print(Y_validation.shape)
 
     # Select only few training examples - uncomment for quick testing
-    X_train = selectData(X_train, 128)
-    Y_train = selectData(Y_train, 128)
-    X_validation = selectData(X_validation, 30)
-    Y_validation = selectData(Y_validation, 30)
+    #X_train = selectData(X_train, 128)
+    #Y_train = selectData(Y_train, 128)
+    #X_validation = selectData(X_validation, 30)
+   # Y_validation = selectData(Y_validation, 30)
 
     # Hyperparameters
-    batch_size = 16
-    nb_epoch = 5
-    patience = 2
+    batch_size = 128
+    nb_epoch = 300
+    patience = 12
     num_classes = 8
     loss = 'categorical_crossentropy'
     metrics = ['accuracy']
 
 
-    ####### Experiment 2
+
+####### Experiment 1
+
+
+    # Model on imagenet and optimizer instantiation
+    model = VGG16(include_top=True, weights='imagenet')
+    model.summary()
+    opt = Adam()
+
+    # Do the transfer learning
+    model = refactorOutputs(model, num_classes, True)
+    model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
+                     Y_validation,
+                     "Experiment1History.", False)
+
+    model.save("Experiment1Model.h5")
+    ###########
+
+
+
+
+
+####### Experiment 2
 
 
     # Model on imagenet and optimizer instantiation
@@ -78,11 +96,10 @@ if __name__ == '__main__':
     model = setTrainableLayers(model, 12)
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
-                     "Experiment1History.", False)
+                     "Experiment2History.", False)
 
-    model.save("Experiment1Model.h5")
-    for layer in model.layers:
-        print(layer.name, layer.trainable)
+    model.save("Experiment2Model.h5")
+
 ###########
 
 
@@ -99,33 +116,9 @@ if __name__ == '__main__':
     model = setTrainableLayers(model, 1)
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
-                     "Experiment1History.", False)
+                     "Experiment3History.", False)
 
-    model.save("Experiment1Model.h5")
-    for layer in model.layers:
-        print(layer.name, layer.trainable)
+    model.save("Experiment3Model.h5")
 ###########
 
 
-'''
-####### Experiment 1
-
-
-    # Model on imagenet and optimizer instantiation
-    model = VGG16(include_top=True, weights='imagenet')
-    model.summary()
-    opt = Adam()
-
-    # Do the transfer learning
-    model = refactorOutputs(model, num_classes, True)
-    model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
-                     Y_validation,
-                     "Experiment1History.", False)
-
-    model.save("Experiment1Model.h5")
-###########
-
-
-
-
-'''
