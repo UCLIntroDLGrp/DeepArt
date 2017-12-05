@@ -63,7 +63,7 @@ if __name__ == '__main__':
     num_classes = 8
     loss = 'categorical_crossentropy'
     metrics = ['accuracy']
-    
+
 
     ####### Experiment 2
 
@@ -84,7 +84,7 @@ if __name__ == '__main__':
     for layer in model.layers:
         print(layer.name, layer.trainable)
 ###########
-
+'''
 ####### Experiment 1
 
 
@@ -122,4 +122,4 @@ if __name__ == '__main__':
                      "Experiment1History.", False)
 
     model.save("Experiment1Model.h5")
-###########
+########### '''
