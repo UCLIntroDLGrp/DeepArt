@@ -25,10 +25,10 @@ import os
 sys.path.insert(0, os.path.realpath('../'))
 
 from keras.optimizers import Adam
-from sklearn.metrics import f1_score, log_loss
+
 from TransferLearning.transferLearning import refactorOutputs, setTrainableLayers, fineTune
 from Preprocessing.preprocessing import generate_cropped_training_and_test_data
-from Utilities.utilities import selectData, collapseVectors
+from Utilities.utilities import selectData
 from keras.applications.vgg16 import VGG16
 
 if __name__ == '__main__':
@@ -63,6 +63,30 @@ if __name__ == '__main__':
     num_classes = 8
     loss = 'categorical_crossentropy'
     metrics = ['accuracy']
+    
+
+    ####### Experiment 2
+
+
+    # Model on imagenet and optimizer instantiation
+    model = VGG16(include_top=True, weights='imagenet')
+    model.summary()
+    opt = Adam()
+
+    # Do the transfer learning
+    model = refactorOutputs(model, num_classes, True)
+    model = setTrainableLayers(model, 13)
+    model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
+                     Y_validation,
+                     "Experiment1History.", False)
+
+    model.save("Experiment1Model.h5")
+    for layer in model.layers:
+        print(layer.name, layer.trainable)
+###########
+
+####### Experiment 1
+
 
     # Model on imagenet and optimizer instantiation
     model = VGG16(include_top=True, weights='imagenet')
@@ -76,3 +100,26 @@ if __name__ == '__main__':
                      "Experiment1History.", False)
 
     model.save("Experiment1Model.h5")
+###########
+
+
+
+
+
+
+####### Experiment 3
+
+
+    # Model on imagenet and optimizer instantiation
+    model = VGG16(include_top=True, weights='imagenet')
+    model.summary()
+    opt = Adam()
+
+    # Do the transfer learning
+    model = refactorOutputs(model, num_classes, True)
+    model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
+                     Y_validation,
+                     "Experiment1History.", False)
+
+    model.save("Experiment1Model.h5")
+###########
