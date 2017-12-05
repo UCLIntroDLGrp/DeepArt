@@ -45,6 +45,11 @@ if __name__ == '__main__':
                                                                                train_size,
                                                                                10)
 
+    print(X_train.shape)
+    print(Y_train.shape)
+    print(X_validation.shape)
+    print(Y_validation.shape)
+
     # Select only few training examples - uncomment for quick testing
     X_train = selectData(X_train, 128)
     Y_train = selectData(Y_train, 128)
