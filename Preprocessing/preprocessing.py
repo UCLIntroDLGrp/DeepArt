@@ -92,9 +92,13 @@ def load_images(directory_path):
         images: an array of all the art images
         label: the genre corresponding to each image
     '''
-    class_dictionary = read_directory(directory_path)
+    class_dictionary = read_directory(directory_path) # CLASS_NAMES =["blah" "blahblah".....]
     images = []
     labels = []
+
+    #for subdir in CLASS_NAMES:
+    #dict = read_directory(directort_path+subdir)
+    #
 
     for key, value in zip(class_dictionary.keys(), class_dictionary.values()):
         for image_name in value:
