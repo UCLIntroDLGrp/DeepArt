@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
     # Do the transfer learning
     model = refactorOutputs(model, num_classes, True)
-    model = setTrainableLayers(model, 13)
+    model = setTrainableLayers(model, 14)
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
                      "Experiment1History.", False)
@@ -84,6 +84,27 @@ if __name__ == '__main__':
     for layer in model.layers:
         print(layer.name, layer.trainable)
 ###########
+
+
+####### Experiment 3
+
+
+    # Model on imagenet and optimizer instantiation
+    model = VGG16(include_top=True, weights='imagenet')
+    model.summary()
+    opt = Adam()
+
+    # Do the transfer learning
+    model = refactorOutputs(model, num_classes, True)
+    model = setTrainableLayers(model, 1)
+    model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
+                     Y_validation,
+                     "Experiment1History.", False)
+
+    model.save("Experiment1Model.h5")
+###########
+
+
 '''
 ####### Experiment 1
 
@@ -105,21 +126,4 @@ if __name__ == '__main__':
 
 
 
-
-
-####### Experiment 3
-
-
-    # Model on imagenet and optimizer instantiation
-    model = VGG16(include_top=True, weights='imagenet')
-    model.summary()
-    opt = Adam()
-
-    # Do the transfer learning
-    model = refactorOutputs(model, num_classes, True)
-    model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
-                     Y_validation,
-                     "Experiment1History.", False)
-
-    model.save("Experiment1Model.h5")
-########### '''
+'''
