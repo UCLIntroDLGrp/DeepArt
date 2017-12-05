@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
     # Do the transfer learning
     model = refactorOutputs(model, num_classes, True)
-    model = setTrainableLayers(model, 14)
+    model = setTrainableLayers(model, 12)
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
                      "Experiment1History.", False)
@@ -102,6 +102,8 @@ if __name__ == '__main__':
                      "Experiment1History.", False)
 
     model.save("Experiment1Model.h5")
+    for layer in model.layers:
+        print(layer.name, layer.trainable)
 ###########
 
 
