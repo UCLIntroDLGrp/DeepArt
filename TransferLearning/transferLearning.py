@@ -81,7 +81,7 @@ def fineTune(model, batch_size, nb_epoch, optimizer, loss,
             raise ValueError("saveModel needs to be a string.")
 
         pickle_out = open(saveModel+"pickle", "wb")
-        dump(history, pickle_out)
+        dump(history.history, pickle_out)
         pickle_out.close()
 
 

@@ -46,15 +46,15 @@ if __name__ == '__main__':
                                                                                10)
 
     # Select only few training examples - uncomment for quick testing
-    X_train = selectData(X_train, 30)
-    Y_train = selectData(Y_train, 30)
-    X_validation = selectData(X_validation, 10)
-    Y_validation = selectData(Y_validation, 10)
+    X_train = selectData(X_train, 128)
+    Y_train = selectData(Y_train, 128)
+    X_validation = selectData(X_validation, 30)
+    Y_validation = selectData(Y_validation, 30)
 
     # Hyperparameters
-    batch_size = 5
-    nb_epoch = 2
-    patience = 10
+    batch_size = 16
+    nb_epoch = 5
+    patience = 2
     num_classes = 8
     loss = 'categorical_crossentropy'
     metrics = ['accuracy']
