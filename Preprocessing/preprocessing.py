@@ -75,7 +75,7 @@ def read_directory(directory_path):
                           of image names as values.
     '''
     get_dir_names = os.listdir(directory_path)
-    list_of_directories = ['Art_Nouveau_Modern', 'Baroque', 'Cubism', 'Expressionism', 'Impressionism', 'Pointillism', 'Realism', 'Romantism']
+    list_of_directories = ['Art_Nouveau_Modern', 'Baroque', 'Cubism', 'Expressionism', 'Impressionism', 'Symbolism', 'Realism', 'Romantism']
     filter_dir_names = filter(lambda x: x in list_of_directories, get_dir_names)
 
     class_dictionary = dict()
@@ -247,4 +247,4 @@ def generate_cropped_training_and_test_data(directory_path, crop_dimensions, num
             cropped_images_test.append(crop)
             cropped_labels_test.append(label)
 
-    return np.array(cropped_images_train), np.array(cropped_images_test), np.array(cropped_labels_train).reshape(-1, 8), np.array(cropped_labels_test).reshape(-1, 8)
+    return np.array(cropped_images_train), np.array(cropped_images_test), np.array(cropped_labels_train), np.array(cropped_labels_test)
