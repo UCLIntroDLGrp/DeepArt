@@ -29,6 +29,7 @@ from keras.optimizers import Adam
 from TransferLearning.transferLearning import refactorOutputs, setTrainableLayers, fineTune
 from Preprocessing.preprocessing import generate_cropped_training_and_test_data
 from Utilities.utilities import selectData
+from keras.applications.resnet50 import ResNet50
 from keras.applications.vgg16 import VGG16
 
 if __name__ == '__main__':
@@ -53,6 +54,8 @@ if __name__ == '__main__':
     X_validation = selectData(X_validation, 30)
     Y_validation = selectData(Y_validation, 30)
 
+
+
     # Hyperparameters
     batch_size = 128
     nb_epoch = 300
@@ -67,7 +70,7 @@ if __name__ == '__main__':
 
 
     # Model on imagenet and optimizer instantiation
-    model = VGG16(include_top=True, weights='imagenet')
+    model = ResNet50(include_top=True, weights='imagenet')
     model.summary()
     opt = Adam()
 
@@ -81,7 +84,7 @@ if __name__ == '__main__':
     ###########
 
 
-
+'''
 
 
 ####### Experiment 2
@@ -123,3 +126,4 @@ if __name__ == '__main__':
 ###########
 
 
+'''
