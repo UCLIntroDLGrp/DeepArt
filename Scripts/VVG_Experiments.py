@@ -34,7 +34,8 @@ from keras.applications.vgg16 import VGG16
 if __name__ == '__main__':
     # Get the data:
     crop_dims = (224, 224)
-    directory = "../wikiart"
+    #directory = "../wikiart"
+    directory = '../Art_Data_sm'
     number_of_crops = 4
     validation_size = 10.0 / 100
     train_size = 80.0 / 100
@@ -47,10 +48,10 @@ if __name__ == '__main__':
 
 
     # Select only few training examples - uncomment for quick testing
-    #X_train = selectData(X_train, 128)
-    #Y_train = selectData(Y_train, 128)
-    #X_validation = selectData(X_validation, 30)
-   # Y_validation = selectData(Y_validation, 30)
+    X_train = selectData(X_train, 128)
+    Y_train = selectData(Y_train, 128)
+    X_validation = selectData(X_validation, 30)
+    Y_validation = selectData(Y_validation, 30)
 
     # Hyperparameters
     batch_size = 128
