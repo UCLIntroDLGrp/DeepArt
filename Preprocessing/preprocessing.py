@@ -99,12 +99,17 @@ def load_images(directory_path):
     images = []
     labels = []
 
+    count = 0
     for key, value in zip(class_dictionary.keys(), class_dictionary.values()):
         for image_name in value:
             image = Image.open(directory_path + "/" + key + "/" + image_name)
 
             images.append(np.array(image))
             labels.append(key)
+            count += 1
+        if count > 500:
+            count =0
+            print("Loaded 500 images...")
 
     return images, labels
 
@@ -120,6 +125,7 @@ def select_images_of_similar_size(directory, percent, print_me=False):
        num_before: number of images originally loaded
        num_after: number of images after removing smallest / largest percent
    """
+    print("Selecting images of similar size....")
     images_in, labels_in = load_images(directory)
     num_before = len(images_in)
 
@@ -147,6 +153,11 @@ def select_images_of_similar_size(directory, percent, print_me=False):
         elif image.shape[1] > np.percentile(heights, 100 - percent):
             i_vanish.append(index)
         index += 1
+
+        if(index % 500 ==0):
+            print("500 images scanned for similar size.")
+
+    print("selected images of similar size finished.")
 
     if print_me == True:
         print("removing indices: ", i_vanish)
@@ -236,17 +247,32 @@ def generate_cropped_training_and_test_data(directory_path, crop_dimensions, num
     cropped_labels_train = []
     cropped_images_test = []
     cropped_labels_test = []
-
+    print("Loaded Uncropped images..")
+    print("Cropping....")
+    print("Croping training images..")
+    count = 0
     for image, label in zip(X_train, y_train):
         cropped = generate_random_crops(image, crop_dimensions, number_of_crops)
         for crop in cropped:
             cropped_images_train.append(crop)
             cropped_labels_train.append(label)
+            count +=1
+            if count > 1000:
+                print("Cropped 1000 Training Images")
+                count = 0
+
+    print("Now cropping test images...")
+    count = 0
 
     for image, label in zip(X_test, y_test):
         cropped = generate_random_crops(image, crop_dimensions, number_of_crops)
         for crop in cropped:
             cropped_images_test.append(crop)
             cropped_labels_test.append(label)
+        count +=1
+        if count >500:
+            print("Cropped 500 Test Images")
+            count = 0
+
 
     return np.array(cropped_images_train), np.array(cropped_images_test), np.array(cropped_labels_train), np.array(cropped_labels_test)
