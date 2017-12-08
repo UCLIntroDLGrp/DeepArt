@@ -107,9 +107,9 @@ def load_images(directory_path):
             print (key)
 
         for image_name in value:
-            if(count == 0):
-                print("Getting into inner loop")
-                print(image_name)
+
+            print("Getting into inner loop")
+            print(image_name)
             image = Image.open(directory_path + "/" + key + "/" + image_name)
 
             images.append(np.array(image))
