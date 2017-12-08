@@ -104,7 +104,7 @@ def load_images(directory_path):
     for key, value in zip(class_dictionary.keys(), class_dictionary.values()):
         if(count == 0):
             print("Getting into outer for loop ")
-            print (key, value)
+            print (key)
 
         for image_name in value:
             if(count == 0):
