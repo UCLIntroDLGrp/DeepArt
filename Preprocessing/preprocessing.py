@@ -95,13 +95,21 @@ def load_images(directory_path):
         images: an array of all the art images
         label: the genre corresponding to each image
     '''
+    print("Entered Load Images...")
     class_dictionary = read_directory(directory_path)
     images = []
     labels = []
 
     count = 0
     for key, value in zip(class_dictionary.keys(), class_dictionary.values()):
+        if(count == 0):
+            print("Getting into outer for loop ")
+            print (key, value)
+
         for image_name in value:
+            if(count == 0):
+                print("Getting into inner loop")
+                print(image_name)
             image = Image.open(directory_path + "/" + key + "/" + image_name)
 
             images.append(np.array(image))
