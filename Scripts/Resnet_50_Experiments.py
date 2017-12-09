@@ -28,11 +28,10 @@ sys.path.insert(0, os.path.realpath('../'))
 
 from keras.optimizers import Adam
 
-from TransferLearning.transferLearning import refactorOutputs, setTrainableLayers, fineTune
+from TransferLearning.transferLearning import refactorOutputs, setTrainableLayers,freezeLayersUpTo, fineTune
 from Preprocessing.preprocessing import generate_cropped_training_and_test_data
 from Utilities.utilities import selectData
 from keras.applications.resnet50 import ResNet50
-from keras.applications.vgg16 import VGG16
 
 if __name__ == '__main__':
     sm_train_data = False
@@ -62,14 +61,18 @@ if __name__ == '__main__':
             Y_validation = selectData(Y_validation, 30)
 
     else:
-        X_train = np.load("X_train.npy")
-        X_validation = np.load("X_validation.npy")
-        Y_train = np.load("Y_train.npy")
-        Y_validation = np.load("Y_validation.npy")
+        X_train = np.load("../SavedData/X_train.npy")
+        X_validation = np.load("../SavedData/X_validation.npy")
+        Y_train = np.load("../SavedData/Y_train.npy")
+        Y_validation = np.load("../SavedData/Y_validation.npy")
 
+    X_train = selectData(X_train, 32)
+    Y_train = selectData(Y_train, 32)
+    X_validation = selectData(X_validation, 16)
+    Y_validation = selectData(Y_validation, 16)
 
     # Hyperparameters
-    batch_size = 16
+    batch_size = 8
     nb_epoch = 2
     patience = 1
     num_classes = 8
@@ -85,36 +88,36 @@ if __name__ == '__main__':
     model = ResNet50(include_top=True, weights='imagenet')
     model.summary()
     opt = Adam()
-
     # Do the transfer learning
     model = refactorOutputs(model, num_classes, True)
+
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
-                     "Experiment1History.", False)
+                     "../SavedData/Experiment1HistoryResnet.", False)
 
-    model.save("Experiment1Model.h5")
+    model.save("../SavedData/Experiment1Resnet.h5")
     ###########
 
 
-'''
+
 
 
 ####### Experiment 2
 
 
     # Model on imagenet and optimizer instantiation
-    model = VGG16(include_top=True, weights='imagenet')
+    model = ResNet50(include_top=True, weights='imagenet')
     model.summary()
     opt = Adam()
 
     # Do the transfer learning
     model = refactorOutputs(model, num_classes, True)
-    model = setTrainableLayers(model, 12)
+    model = freezeLayersUpTo(model, "activation_13")
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
-                     "Experiment2History.", False)
+                     "../SavedData/Experiment2HistoryResnet.", False)
 
-    model.save("Experiment2Model.h5")
+    model.save("../SavedData/Experiment2Resnet.h5")
 
 ###########
 
@@ -123,7 +126,7 @@ if __name__ == '__main__':
 
 
     # Model on imagenet and optimizer instantiation
-    model = VGG16(include_top=True, weights='imagenet')
+    model = ResNet50(include_top=True, weights='imagenet')
     model.summary()
     opt = Adam()
 
@@ -132,10 +135,9 @@ if __name__ == '__main__':
     model = setTrainableLayers(model, 1)
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
-                     "Experiment3History.", False)
+                     "../SavedData/Experiment3HistoryResnet.", False)
 
-    model.save("Experiment3Model.h5")
+    model.save("../SavedData/Experiment3Resnet.h5")
 ###########
 
 
-'''

@@ -43,6 +43,24 @@ def setTrainableLayers(model, layers_to_train):
     return model
 
 
+def freezeLayersUpTo(model, layer_name):
+    '''
+    Sets the number of layers that can be trained in the model.
+    :param model: The model we want to train.
+    :param layers_to_train: int, The number of layers to train from last to first.
+    :return: The model with only the last layers_to_train that are trainable
+    '''
+
+    for layer in model.layers:
+        layer.trainable = False
+
+        if(layer.name == layer_name):
+            break
+
+    return model
+
+
+
 def fineTune(model, batch_size, nb_epoch, optimizer, loss,
              metrics,patience, X_train, Y_train, X_valid, Y_valid, saveModel = False, verbose=False):
     '''
@@ -86,3 +104,8 @@ def fineTune(model, batch_size, nb_epoch, optimizer, loss,
 
 
     return model
+
+
+def printLayers(model):
+    for layer in model.layers:
+        print("Layer Name : " + layer.name + " , Layer trainable : " +str(layer.trainable))
