@@ -1,8 +1,10 @@
 from keras.layers import Dense
 from keras.models import Model
+from pickle import dump
+from keras.callbacks import EarlyStopping
 
 
-def refactorOutputs(model,outputs,verbose=False):
+def refactorOutputs(model, outputs, verbose=False):
     '''
     Replace the final layer of the input model with a fully connected layer with specified outputs.
     :param model:  The model to modify
@@ -10,7 +12,7 @@ def refactorOutputs(model,outputs,verbose=False):
     :param verbose: If True will print summary of the model before and after modification
     :return: The model, after the final layer has been replaced
     '''
-    if(verbose):
+    if (verbose):
         model.summary()
 
     num_classes = outputs
@@ -18,13 +20,13 @@ def refactorOutputs(model,outputs,verbose=False):
     x = Dense(num_classes, activation='softmax', name='output_predictions')(model.layers[-1].output)
     model = Model(inputs=model.input, outputs=x)
 
-    if(verbose):
+    if (verbose):
         model.summary()
 
     return model
 
 
-def setTrainableLayers(model, layers_to_train ):
+def setTrainableLayers(model, layers_to_train):
     '''
     Sets the number of layers that can be trained in the model.
     :param model: The model we want to train.
@@ -32,7 +34,7 @@ def setTrainableLayers(model, layers_to_train ):
     :return: The model with only the last layers_to_train that are trainable
     '''
 
-    if(layers_to_train>len(model.layers)):
+    if (layers_to_train > len(model.layers)):
         raise ValueError("Cannot train on more layers than the model!")
 
     for layer in model.layers[:-layers_to_train]:
@@ -40,8 +42,9 @@ def setTrainableLayers(model, layers_to_train ):
 
     return model
 
-def fineTune(model,batch_size, nb_epoch,optimizer,loss,
-                  metrics, X_train, Y_train, X_valid, Y_valid, verbose=False):
+
+def fineTune(model, batch_size, nb_epoch, optimizer, loss,
+             metrics,patience, X_train, Y_train, X_valid, Y_valid, saveModel = False, verbose=False):
     '''
     Fine tunes the model.
     :param model: The model to fine-tune
@@ -58,17 +61,28 @@ def fineTune(model,batch_size, nb_epoch,optimizer,loss,
     :return: The model, after the trainable layers have been fine-tuned to the new data.
     '''
 
-    if(verbose):
+    if (verbose):
         model.summary()
 
     model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
 
-    model.fit(X_train, Y_train,
-               batch_size=batch_size,
-               epochs=nb_epoch,
-               shuffle=True,
-               verbose=1,
-               validation_data=(X_valid, Y_valid),
-               )
+
+    history = model.fit(X_train, Y_train,
+                        batch_size=batch_size,
+                        epochs=nb_epoch,
+                        shuffle=True,
+                        verbose=1,
+                        validation_data=(X_valid, Y_valid),
+                        callbacks=[EarlyStopping(monitor='val_loss', patience=patience)]
+                        )
+
+    if (saveModel):
+        if(not isinstance(saveModel, str)):
+            raise ValueError("saveModel needs to be a string.")
+
+        pickle_out = open(saveModel+"pickle", "wb")
+        dump(history.history, pickle_out)
+        pickle_out.close()
+
 
     return model
