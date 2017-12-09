@@ -75,14 +75,17 @@ def read_directory(directory_path):
                           of image names as values.
     '''
     get_dir_names = os.listdir(directory_path)
+   # list_of_directories = ['Art_Nouveau_Modern', 'Baroque', 'Cubism', 'Expressionism', 'Impressionism', 'Symbolism', 'Realism', 'Romantism']
+    list_of_directories = ['Art_Nouveau_Modern', 'Baroque', 'Cubism', 'Expressionism', 'Impressionism', 'Pointillism',
+                           'Realism', 'Romantism']
+    filter_dir_names = filter(lambda x: x in list_of_directories, get_dir_names)
 
     class_dictionary = dict()
 
-    for directory in get_dir_names:
+    for directory in filter_dir_names:
         class_dictionary[directory] = os.listdir(directory_path + "/" + directory)
 
     return class_dictionary
-
 
 def load_images(directory_path):
     '''
@@ -92,16 +95,29 @@ def load_images(directory_path):
         images: an array of all the art images
         label: the genre corresponding to each image
     '''
+    print("Entered Load Images...")
     class_dictionary = read_directory(directory_path)
     images = []
     labels = []
 
+    count = 0
     for key, value in zip(class_dictionary.keys(), class_dictionary.values()):
+        if(count == 0):
+            print("Getting into outer for loop ")
+            print (key)
+
         for image_name in value:
+            if(count ==0):
+                print("Getting into inner loop")
+                print(image_name)
             image = Image.open(directory_path + "/" + key + "/" + image_name)
 
             images.append(np.array(image))
             labels.append(key)
+            count += 1
+            if count > 500:
+                count =0
+                print("Loaded 500 images...")
 
     return images, labels
 
@@ -117,6 +133,7 @@ def select_images_of_similar_size(directory, percent, print_me=False):
        num_before: number of images originally loaded
        num_after: number of images after removing smallest / largest percent
    """
+    print("Selecting images of similar size....")
     images_in, labels_in = load_images(directory)
     num_before = len(images_in)
 
@@ -144,6 +161,11 @@ def select_images_of_similar_size(directory, percent, print_me=False):
         elif image.shape[1] > np.percentile(heights, 100 - percent):
             i_vanish.append(index)
         index += 1
+
+        if(index % 500 ==0):
+            print("500 images scanned for similar size.")
+
+    print("selected images of similar size finished.")
 
     if print_me == True:
         print("removing indices: ", i_vanish)
@@ -233,17 +255,32 @@ def generate_cropped_training_and_test_data(directory_path, crop_dimensions, num
     cropped_labels_train = []
     cropped_images_test = []
     cropped_labels_test = []
-
+    print("Loaded Uncropped images..")
+    print("Cropping....")
+    print("Croping training images..")
+    count = 0
     for image, label in zip(X_train, y_train):
         cropped = generate_random_crops(image, crop_dimensions, number_of_crops)
         for crop in cropped:
             cropped_images_train.append(crop)
             cropped_labels_train.append(label)
+            count +=1
+            if count > 1000:
+                print("Cropped 1000 Training Images")
+                count = 0
+
+    print("Now cropping test images...")
+    count = 0
 
     for image, label in zip(X_test, y_test):
         cropped = generate_random_crops(image, crop_dimensions, number_of_crops)
         for crop in cropped:
             cropped_images_test.append(crop)
             cropped_labels_test.append(label)
+        count +=1
+        if count >500:
+            print("Cropped 500 Test Images")
+            count = 0
 
-    return np.array(cropped_images_train), np.array(cropped_images_test), np.array(cropped_labels_train).reshape(-1, 8), np.array(cropped_labels_test).reshape(-1, 8)
+
+    return np.array(cropped_images_train), np.array(cropped_images_test), np.array(cropped_labels_train), np.array(cropped_labels_test)
