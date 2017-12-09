@@ -8,10 +8,8 @@ from sklearn.metrics import f1_score, log_loss
 from TransferLearning.transferLearning import refactorOutputs,setTrainableLayers,fineTune
 from Preprocessing.preprocessing import generate_cropped_training_and_test_data
 from Utilities.utilities import selectData, collapseVectors
-from vis.visualization import visualize_saliency, visualize_activation
-from PIL import Image
-from vis.utils import utils
 from keras.applications.vgg16 import VGG16
+
 
 if __name__ == '__main__':
     #Get the data:
@@ -41,18 +39,6 @@ if __name__ == '__main__':
     model = VGG16(include_top=True, weights='imagenet')
     model.summary()
     opt = Adam()
-
-    layer_index = utils.find_layer_idx(model,'block5_conv3')
-    print(layer_index)
-    ret = visualize_activation(model,layer_index, None, X_test[1,:,:,:]);
-
-    img = Image.fromarray(ret, 'RGB')
-    img.show()
-
-    ret2 = visualize_saliency(model, layer_index, None, X_test[1, :, :, :]);
-
-    img2 = Image.fromarray(ret2, 'RGB')
-    img2.show()
 
 
     #Do the transfer learning
