@@ -35,7 +35,7 @@ from keras.applications.resnet50 import ResNet50
 
 if __name__ == '__main__':
     sm_train_data = False
-    debug_data = False
+    debug_data = True
 
     if(sm_train_data):
 
@@ -53,23 +53,20 @@ if __name__ == '__main__':
                                                                                    train_size,
                                                                                    10)
 
-        if(debug_data):
-            # Select only few training examples - uncomment for quick testing
-            X_train = selectData(X_train, 128)
-            Y_train = selectData(Y_train, 128)
-            X_validation = selectData(X_validation, 30)
-            Y_validation = selectData(Y_validation, 30)
-
     else:
         X_train = np.load("../SavedData/X_train.npy")
         X_validation = np.load("../SavedData/X_validation.npy")
         Y_train = np.load("../SavedData/Y_train.npy")
         Y_validation = np.load("../SavedData/Y_validation.npy")
 
-    X_train = selectData(X_train, 32)
-    Y_train = selectData(Y_train, 32)
-    X_validation = selectData(X_validation, 16)
-    Y_validation = selectData(Y_validation, 16)
+
+    if (debug_data):
+        # Select only few training examples - uncomment for quick testing
+        X_train = selectData(X_train, 32)
+        Y_train = selectData(Y_train, 32)
+        X_validation = selectData(X_validation, 16)
+        Y_validation = selectData(Y_validation, 16)
+
 
     # Hyperparameters
     batch_size = 8
@@ -86,10 +83,12 @@ if __name__ == '__main__':
 
     # Model on imagenet and optimizer instantiation
     model = ResNet50(include_top=True, weights='imagenet')
-    model.summary()
     opt = Adam()
     # Do the transfer learning
     model = refactorOutputs(model, num_classes, True)
+
+    #for layer in model.layers:
+     #   layer.name = "Experiment_1_" + layer.name
 
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
@@ -107,12 +106,15 @@ if __name__ == '__main__':
 
     # Model on imagenet and optimizer instantiation
     model = ResNet50(include_top=True, weights='imagenet')
-    model.summary()
     opt = Adam()
 
     # Do the transfer learning
     model = refactorOutputs(model, num_classes, True)
-    model = freezeLayersUpTo(model, "activation_13")
+
+    #for layer in model.layers:
+     #   layer.name = "Experiment_2_" + layer.name
+
+    model = freezeLayersUpTo(model, "Experiment_2_activation_13")
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
                      "../SavedData/Experiment2HistoryResnet.", False)
@@ -127,11 +129,12 @@ if __name__ == '__main__':
 
     # Model on imagenet and optimizer instantiation
     model = ResNet50(include_top=True, weights='imagenet')
-    model.summary()
     opt = Adam()
 
     # Do the transfer learning
     model = refactorOutputs(model, num_classes, True)
+   # for layer in model.layers:
+    #    layer.name = "Experiment_3_" + layer.name
     model = setTrainableLayers(model, 1)
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
