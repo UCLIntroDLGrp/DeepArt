@@ -9,7 +9,7 @@ from Preprocessing.preprocessing import generate_cropped_training_and_test_data
 if __name__ == '__main__':
     # Get the data:
     crop_dims = (224, 224)
-    directory = '../wikiart'
+    directory = '../Art_Data_sm'
     number_of_crops = 4
     validation_size = 10.0 / 100
     train_size = 80.0 / 100
@@ -21,7 +21,7 @@ if __name__ == '__main__':
                                                                                10)
     print("Saving...")
 
-    np.save("X_train", X_train)
-    np.save("X_validation", X_validation)
-    np.save("Y_train", Y_train)
-    np.save("Y_validation", Y_validation)
+    np.save("../SavedData/X_train", X_train)
+    np.save("../SavedData/X_validation", X_validation)
+    np.save("../SavedData/Y_train", Y_train)
+    np.save("../SavedData/Y_validation", Y_validation)
