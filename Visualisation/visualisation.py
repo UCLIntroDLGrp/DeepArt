@@ -1,11 +1,12 @@
 from vis.utils import utils
 from vis.visualization import  visualize_activation
 from matplotlib import pyplot as plt
+from pylab import savefig
 from keras import activations
 from vis.input_modifiers import Jitter
 
 
-def visualiseDenseLayer(model,layer_name,output_classes, verbose):
+def visualiseDenseLayer(model,layer_name,output_classes, verbose, save=False):
     '''
     Makes a plot for visualising  the activations of a dense layer.
     :param model:  The model to visualise.
@@ -33,9 +34,11 @@ def visualiseDenseLayer(model,layer_name,output_classes, verbose):
     plt.axis('off')
     plt.imshow(stitched)
     plt.show()
+    if(save):
+        savefig("../SavedData/"+ save)
 
 
-def visualiseCovolutionLayer(model,selected_layer,selected_indices, verbose):
+def visualiseCovolutionLayer(model,selected_layer,selected_indices, verbose,save=False):
     '''
     Makes a plot for visualising  the activations of a convolutional layer.
     :param model: The model to visualise.
@@ -60,4 +63,6 @@ def visualiseCovolutionLayer(model,selected_layer,selected_indices, verbose):
     plt.axis('off')
     plt.imshow(stitched)
     plt.show()
-    #############
+    if(save):
+        savefig("../SavedData/" + save)
+
