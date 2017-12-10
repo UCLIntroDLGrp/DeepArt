@@ -32,9 +32,10 @@ def visualiseDenseLayer(model,layer_name,output_classes, verbose, save=False):
     plt.figure()
     plt.axis('off')
     plt.imshow(stitched)
-    plt.show()
     if(save):
         plt.savefig("../SavedData/"+ save)
+    else:
+        plt.show()
 
 
 def visualiseCovolutionLayer(model,selected_layer,selected_indices, verbose,save=False):
@@ -61,7 +62,9 @@ def visualiseCovolutionLayer(model,selected_layer,selected_indices, verbose,save
     plt.figure()
     plt.axis('off')
     plt.imshow(stitched)
-    plt.show()
+
     if(save):
         plt.savefig("../SavedData/" + save)
+    else:
+        plt.show()
 
