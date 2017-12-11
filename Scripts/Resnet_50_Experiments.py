@@ -70,32 +70,11 @@ if __name__ == '__main__':
 
     # Hyperparameters
     batch_size = 8
-    nb_epoch = 2
-    patience = 1
+    nb_epoch = 30
+    patience = 20
     num_classes = 8
     loss = 'categorical_crossentropy'
     metrics = ['accuracy']
-
-
-
-####### Experiment 1
-
-
-    # Model on imagenet and optimizer instantiation
-    model = ResNet50(include_top=True, weights='imagenet')
-    opt = Adam()
-    # Do the transfer learning
-    model = refactorOutputs(model, num_classes, True)
-
-    #for layer in model.layers:
-     #   layer.name = "Experiment_1_" + layer.name
-
-    model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
-                     Y_validation,
-                     "../SavedData/Experiment1HistoryResnet.", False)
-
-    model.save("../SavedData/Experiment1Resnet.h5")
-    ###########
 
 
 
@@ -123,7 +102,31 @@ if __name__ == '__main__':
 
 ###########
 
+'''
+####### Experiment 1
 
+
+    # Model on imagenet and optimizer instantiation
+    model = ResNet50(include_top=True, weights='imagenet')
+    opt = Adam()
+    # Do the transfer learning
+    model = refactorOutputs(model, num_classes, True)
+
+    #for layer in model.layers:
+     #   layer.name = "Experiment_1_" + layer.name
+
+    model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
+                     Y_validation,
+                     "../SavedData/Experiment1HistoryResnet.", False)
+
+    model.save("../SavedData/Experiment1Resnet.h5")
+    ###########
+
+'''
+
+
+
+'''
 ####### Experiment 3
 
 
@@ -144,3 +147,4 @@ if __name__ == '__main__':
 ###########
 
 
+'''

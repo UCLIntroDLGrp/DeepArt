@@ -3,7 +3,7 @@ import sys
 sys.path.insert(0, os.path.realpath('../'))
 from keras.models import load_model
 
-from Visualisation.visualisation import visualiseDenseLayer, visualiseCovolutionLayer
+from Visualisation.layerVisualisation import visualiseDenseLayer, visualiseCovolutionLayer
 
 print("Loading the model in Experiment3Resnet.h5....")
 model = load_model('../SavedData/Experiment3Resnet.h5')
