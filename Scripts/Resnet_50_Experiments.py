@@ -102,7 +102,7 @@ if __name__ == '__main__':
 
 ###########
 
-'''
+
 ####### Experiment 1
 
 
@@ -122,11 +122,11 @@ if __name__ == '__main__':
     model.save("../SavedData/Experiment1Resnet.h5")
     ###########
 
-'''
 
 
 
-'''
+
+
 ####### Experiment 3
 
 
@@ -147,4 +147,3 @@ if __name__ == '__main__':
 ###########
 
 
-'''
