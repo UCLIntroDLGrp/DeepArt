@@ -2,9 +2,9 @@
 import sys
 import os
 import numpy as np
-from Preprocessing.preprocessing import generate_training_and_test_data
 
 sys.path.insert(0, os.path.realpath('../'))
+from Preprocessing.preprocessing import generate_training_and_test_data
 
 if __name__ == '__main__':
     # Get the data:
