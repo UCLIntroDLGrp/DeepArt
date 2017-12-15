@@ -37,13 +37,14 @@ if __name__ == '__main__':
     sm_train_data = False
     debug_data = True
 
+    # Get the data:
+    crop_dims = (224, 224)
+    number_of_crops = 4
+
     if(sm_train_data):
 
-        # Get the data:
-        crop_dims = (224, 224)
         #directory = "../wikiart"
         directory = '../Art_Data_sm'
-        number_of_crops = 4
         validation_size = 10.0 / 100
         train_size = 80.0 / 100
         X_train, X_validation, Y_train, Y_validation = generate_cropped_training_and_test_data(directory,
