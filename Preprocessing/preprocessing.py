@@ -78,7 +78,7 @@ def read_directory(directory_path):
                           of image names as values.
     '''
     get_dir_names = os.listdir(directory_path)
-    list_of_directories = ['Art_Nouveau_Modern', 'Baroque', 'Cubism', 'Expressionism', 'Impressionism', 'Symbolism', 'Realism', 'Romantism']
+    list_of_directories = ['Art_Nouveau_Modern', 'Baroque', 'Cubism', 'Expressionism', 'Impressionism', 'Symbolism', 'Realism']
     #list_of_directories = ['Art_Nouveau_Modern', 'Baroque', 'Cubism', 'Expressionism', 'Impressionism', 'Pointillism',
     #                       'Realism', 'Romantism']
     filter_dir_names = filter(
@@ -241,8 +241,9 @@ def generate_training_and_test_data(directory_path, test_size, train_size, image
         images, labels = generate_images_of_same_size(
             directory_path, percent=image_selection_percent)
     else:
-        images, labels = select_images_of_similar_size(
-            directory_path, percent=image_selection_percent)
+        #images, labels = select_images_of_similar_size(
+        #    directory_path, percent=image_selection_percent)
+        images, labels = load_images(directory_path)
 
     labels = np.array(one_hot_encoding(labels)).reshape(-1, 8)
 
