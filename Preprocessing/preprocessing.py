@@ -241,15 +241,51 @@ def generate_training_and_test_data(directory_path, test_size, train_size, image
         images, labels = generate_images_of_same_size(
             directory_path, percent=image_selection_percent)
     else:
-        #images, labels = select_images_of_similar_size(
-        #    directory_path, percent=image_selection_percent)
-        images, labels = load_images(directory_path)
+        images, labels = select_images_of_similar_size(
+            directory_path, percent=image_selection_percent)
 
-    labels = np.array(one_hot_encoding(labels)).reshape(-1, 8)
+    labels = np.array(one_hot_encoding(labels)).reshape(-1, 7)
 
     X_train, X_test, y_train, y_test = train_test_split(
         images, labels, test_size=test_size, train_size=train_size)
     return np.array(X_train), np.array(X_test), y_train, y_test
+
+def crop_data_from_load(X_train, X_test, y_train, y_train, crop_dimensions, number_of_crops):
+    cropped_images_train = []
+    cropped_labels_train = []
+    cropped_images_test = []
+    cropped_labels_test = []
+    print("Loaded Uncropped images..")
+    print("Cropping....")
+    print("Croping training images..")
+    count = 0
+    for image, label in zip(X_train, y_train):
+        cropped = generate_random_crops(
+            image, crop_dimensions, number_of_crops)
+        for crop in cropped:
+            cropped_images_train.append(crop)
+            cropped_labels_train.append(label)
+            count += 1
+            if count > 1000:
+                print("Cropped 1000 Training Images")
+                count = 0
+
+    print("Now cropping test images...")
+    count = 0
+
+    for image, label in zip(X_test, y_test):
+        cropped = generate_random_crops(
+            image, crop_dimensions, number_of_crops)
+        for crop in cropped:
+            cropped_images_test.append(crop)
+            cropped_labels_test.append(label)
+        count += 1
+        if count > 500:
+            print("Cropped 500 Test Images")
+            count = 0
+
+    return np.array(cropped_images_train), np.array(cropped_images_test), np.array(cropped_labels_train), np.array(cropped_labels_test)
+
 
 
 def generate_cropped_training_and_test_data(directory_path, crop_dimensions, number_of_crops, test_size, train_size,
