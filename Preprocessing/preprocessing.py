@@ -250,7 +250,7 @@ def generate_training_and_test_data(directory_path, test_size, train_size, image
         images, labels, test_size=test_size, train_size=train_size)
     return np.array(X_train), np.array(X_test), y_train, y_test
 
-def crop_data_from_load(X_train, X_test, y_train, y_train, crop_dimensions, number_of_crops):
+def crop_data_from_load(X_train, X_test, y_train, y_test, crop_dimensions, number_of_crops):
     cropped_images_train = []
     cropped_labels_train = []
     cropped_images_test = []
