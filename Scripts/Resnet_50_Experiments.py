@@ -28,8 +28,8 @@ sys.path.insert(0, os.path.realpath('../'))
 
 from keras.optimizers import Adam
 
-from TransferLearning.transferLearning import refactorOutputs, setTrainableLayers,freezeLayersUpTo, fineTune
-from Preprocessing.preprocessing import generate_cropped_training_and_test_data
+from TransferLearning.transferLearning import refactorOutputs, setTrainableLayers, freezeLayersUpTo, fineTune
+from Preprocessing.preprocessing import generate_cropped_training_and_test_data, crop_data_from_load
 from Utilities.utilities import selectData
 from keras.applications.resnet50 import ResNet50
 
@@ -47,11 +47,11 @@ if __name__ == '__main__':
         validation_size = 10.0 / 100
         train_size = 80.0 / 100
         X_train, X_validation, Y_train, Y_validation = generate_cropped_training_and_test_data(directory,
-                                                                                   crop_dims,
-                                                                                   number_of_crops,
-                                                                                   validation_size,
-                                                                                   train_size,
-                                                                                   10)
+                                                                                               crop_dims,
+                                                                                               number_of_crops,
+                                                                                               validation_size,
+                                                                                               train_size,
+                                                                                               10)
 
     else:
         X_train = np.load("../SavedData/X_train.npy")
@@ -59,6 +59,8 @@ if __name__ == '__main__':
         Y_train = np.load("../SavedData/Y_train.npy")
         Y_validation = np.load("../SavedData/Y_validation.npy")
 
+        X_train, X_validation, Y_train, Y_validation = crop_data_from_load(
+            X_train, X_validation, Y_train, Y_validation)
 
     if (debug_data):
         # Select only few training examples - uncomment for quick testing
@@ -66,7 +68,6 @@ if __name__ == '__main__':
         Y_train = selectData(Y_train, 32)
         X_validation = selectData(X_validation, 16)
         Y_validation = selectData(Y_validation, 16)
-
 
     # Hyperparameters
     batch_size = 8
@@ -77,11 +78,7 @@ if __name__ == '__main__':
     metrics = ['accuracy']
 
 
-
-
-
-####### Experiment 2
-
+# Experiment 2
 
     # Model on imagenet and optimizer instantiation
     model = ResNet50(include_top=True, weights='imagenet')
@@ -90,8 +87,8 @@ if __name__ == '__main__':
     # Do the transfer learning
     model = refactorOutputs(model, num_classes, True)
 
-    #for layer in model.layers:
-     #   layer.name = "Experiment_2_" + layer.name
+    # for layer in model.layers:
+    #   layer.name = "Experiment_2_" + layer.name
 
     model = freezeLayersUpTo(model, "Experiment_2_activation_13")
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
@@ -123,7 +120,6 @@ if __name__ == '__main__':
     ###########
 
 '''
-
 
 
 '''
