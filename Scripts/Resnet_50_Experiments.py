@@ -60,7 +60,7 @@ if __name__ == '__main__':
         Y_validation = np.load("../SavedData/Y_validation.npy")
 
         X_train, X_validation, Y_train, Y_validation = crop_data_from_load(
-            X_train, X_validation, Y_train, Y_validation)
+            X_train, X_validation, Y_train, Y_validation, crop_dims, number_of_crops)
 
     if (debug_data):
         # Select only few training examples - uncomment for quick testing
