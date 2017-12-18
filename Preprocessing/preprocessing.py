@@ -93,7 +93,7 @@ def read_directory(directory_path):
     return class_dictionary
 
 
-def load_images(directory_path):
+def load_images(directory_path, number_of_each_to_load):
     '''
     Arguments:
         directory_path: the path for where image directories exist
@@ -112,18 +112,35 @@ def load_images(directory_path):
             print("Getting into outer for loop ")
             print(key)
 
-        for image_name in value:
-            if(count == 0):
-                print("Getting into inner loop")
-                print(image_name)
-            image = Image.open(directory_path + "/" + key + "/" + image_name)
+        if len(value) < number_of_each_to_load:
+            for image_name in value:
+                if(count == 0):
+                    print("Getting into inner loop")
+                    print(image_name)
+                image = Image.open(directory_path + "/" + key + "/" + image_name)
 
-            images.append(np.array(image))
-            labels.append(key)
-            count += 1
-            if count > 500:
-                count = 0
-                print("Loaded 500 images...")
+                images.append(np.array(image))
+                labels.append(key)
+                count += 1
+                if count > 500:
+                    count = 0
+                    print("Loaded 500 images...")
+        else:
+            for index in range(number_of_each_to_load):
+                image_name = value[index]
+                if(count == 0):
+                    print("Getting into inner loop")
+                    print(image_name)
+                image = Image.open(directory_path + "/" + key + "/" + image_name)
+
+                images.append(np.array(image))
+                labels.append(key)
+                count += 1
+                if count > 500:
+                    count = 0
+                    print("Loaded 500 images...")
+
+
 
     return images, labels
 
@@ -140,7 +157,7 @@ def select_images_of_similar_size(directory, percent, print_me=False):
        num_after: number of images after removing smallest / largest percent
    """
     print("Selecting images of similar size....")
-    images_in, labels_in = load_images(directory)
+    images_in, labels_in = load_images(directory, number_of_each_to_load=1000)
     num_before = len(images_in)
 
     widths = []
