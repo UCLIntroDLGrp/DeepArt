@@ -35,16 +35,16 @@ from keras.applications.resnet50 import ResNet50
 
 if __name__ == '__main__':
     sm_train_data = False
-    debug_data = True
+    debug_data = False
 
     # Get the data:
     crop_dims = (224, 224)
-    number_of_crops = 4
+    number_of_crops = 1
 
     if(sm_train_data):
 
-        #directory = "../wikiart"
-        directory = '../Art_Data_sm'
+        directory = "../wikiart"
+        #directory = '../Art_Data_sm'
         validation_size = 10.0 / 100
         train_size = 80.0 / 100
         X_train, X_validation, Y_train, Y_validation = generate_cropped_training_and_test_data(directory,
@@ -55,10 +55,10 @@ if __name__ == '__main__':
                                                                                                10)
 
     else:
-        X_train = np.load("../SavedData/X_train.npy")
-        X_validation = np.load("../SavedData/X_validation.npy")
-        Y_train = np.load("../SavedData/Y_train.npy")
-        Y_validation = np.load("../SavedData/Y_validation.npy")
+        np.load("../../../../../ml/2017/DeepArt/SavedData/X_train.npy")
+        np.load("../../../../../ml/2017/DeepArt/SavedData/X_validation.npy")
+        np.load("../../../../../ml/2017/DeepArt/SavedData/Y_train.npy")
+        np.load("../../../../../ml/2017/DeepArt/SavedData/Y_validation.npy")
 
         X_train, X_validation, Y_train, Y_validation = crop_data_from_load(
             X_train, X_validation, Y_train, Y_validation, crop_dims, number_of_crops)
