@@ -74,7 +74,7 @@ if __name__ == '__main__':
     batch_size = 8
     nb_epoch = 30
     patience = 20
-    num_classes = 8
+    num_classes = 7
     loss = 'categorical_crossentropy'
     metrics = ['accuracy']
 
