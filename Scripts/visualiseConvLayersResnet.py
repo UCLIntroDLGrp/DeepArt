@@ -5,17 +5,8 @@ from keras.models import load_model
 
 from Visualisation.layerVisualisation import visualiseDenseLayer, visualiseCovolutionLayer
 
-print("Loading the model in Experiment3Resnet.h5....")
+print("Loading the model in Experiment3Resnet.h5...")
 model = load_model('../SavedData/Experiment3Resnet.h5')
-
-
-print("Visualising the dense layer....")
-selected_layer ='output_predictions'
-output_classes = 8
-save_name = "Experiment_3_Resnet_Output_Visualisation.png"
-visualiseDenseLayer(model,selected_layer,output_classes, False, save=save_name)
-
-
 
 
 print("Visualising the convolutional layer")
