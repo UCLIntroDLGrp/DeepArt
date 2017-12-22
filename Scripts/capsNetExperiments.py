@@ -8,7 +8,7 @@ from Preprocessing.preprocessing import generate_cropped_training_and_test_data,
 from pickle import dump
 
 sm_train_data = False
-debug_data = False
+debug_data = True
 
 crop_dims = (224, 224)
 number_of_crops = 4
@@ -29,13 +29,18 @@ if(sm_train_data):
                                                                                10)
 
 else:
-    X_train = np.load("../../../../../ml/2017/DeepArt/SavedData/X_train.npy")
-    X_validation = np.load("../../../../../ml/2017/DeepArt/SavedData/X_validation.npy")
-    Y_train = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_train.npy")
-    Y_validation = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_validation.npy")
+    X_train = np.load("../SavedData/X_train.npy")
+    X_validation = np.load("../SavedData/X_validation.npy")
+    Y_train = np.load("../SavedData/Y_train.npy")
+    Y_validation = np.load("../SavedData/Y_validation.npy")
 
-    X_train, X_validation, Y_train, Y_validation = crop_data_from_load(
-        X_train, X_validation, Y_train, Y_validation, crop_dims, number_of_crops)
+    #X_train = np.load("../../../../../ml/2017/DeepArt/SavedData/X_train.npy")
+    #X_validation = np.load("../../../../../ml/2017/DeepArt/SavedData/X_validation.npy")
+    #Y_train = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_train.npy")
+    #Y_validation = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_validation.npy")
+
+#    X_train, X_validation, Y_train, Y_validation = crop_data_from_load(
+ #       X_train, X_validation, Y_train, Y_validation, crop_dims, number_of_crops)
 
 
 if (debug_data):
@@ -46,9 +51,9 @@ if (debug_data):
     Y_validation = selectData(Y_validation, 16)
 
 num_routing = 3
-batch_size = 128
+batch_size = 8
 nb_epoch = 5
-num_classes = 7
+num_classes = 8
 #lam_recon = 0
 shift_fraction = 0
 debug = 0

@@ -5,7 +5,7 @@ from keras.models import load_model
 from Visualisation.layerVisualisation import visualiseDenseLayer, visualiseCovolutionLayer
 
 
-MODEL_METADATA =[('../SavedData/Experiment3Resnet.h5',"Experiment_3_Resnet_Output_Visualisation.png")]
+MODEL_METADATA =[('../SavedData/Experiment1Resnet.h5',"Experiment_1_Resnet_Output_Visualisation.png"),('../SavedData/Experiment2Resnet.h5',"Experiment_2_Resnet_Output_Visualisation.png"),('../SavedData/Experiment3Resnet.h5',"Experiment_3_Resnet_Output_Visualisation.png")]
 
 for model_file, figure_save_name in MODEL_METADATA:
     print("Loading the model from {}...".formal(model_file))
@@ -13,5 +13,5 @@ for model_file, figure_save_name in MODEL_METADATA:
 
     print("Visualising the dense layer...")
     selected_layer = 'output_predictions'
-    output_classes = 8
+    output_classes = 7
     visualiseDenseLayer(model,selected_layer,output_classes, False, save=figure_save_name)
