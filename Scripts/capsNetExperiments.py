@@ -4,19 +4,21 @@ sys.path.insert(0, os.path.realpath('../'))
 from capsnet.capsulenet import CapsNet, train
 import numpy as np
 from Utilities.utilities import selectData
-from Preprocessing.preprocessing import generate_cropped_training_and_test_data
+from Preprocessing.preprocessing import generate_cropped_training_and_test_data,crop_data_from_load
 from pickle import dump
 
 sm_train_data = False
-debug_data = True
+debug_data = False
+
+crop_dims = (224, 224)
+number_of_crops = 4
+
 
 if(sm_train_data):
 
     # Get the data:
-    crop_dims = (224, 224)
     #directory = "../wikiart"
     directory = '../Art_Data_sm'
-    number_of_crops = 4
     validation_size = 10.0 / 100
     train_size = 80.0 / 100
     X_train, X_validation, Y_train, Y_validation = generate_cropped_training_and_test_data(directory,
@@ -27,10 +29,13 @@ if(sm_train_data):
                                                                                10)
 
 else:
-    X_train = np.load("../SavedData/X_train.npy")
-    X_validation = np.load("../SavedData/X_validation.npy")
-    Y_train = np.load("../SavedData/Y_train.npy")
-    Y_validation = np.load("../SavedData/Y_validation.npy")
+    X_train = np.load("../../../../../ml/2017/DeepArt/SavedData/X_train.npy")
+    X_validation = np.load("../../../../../ml/2017/DeepArt/SavedData/X_validation.npy")
+    Y_train = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_train.npy")
+    Y_validation = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_validation.npy")
+
+    X_train, X_validation, Y_train, Y_validation = crop_data_from_load(
+        X_train, X_validation, Y_train, Y_validation, crop_dims, number_of_crops)
 
 
 if (debug_data):
@@ -41,9 +46,9 @@ if (debug_data):
     Y_validation = selectData(Y_validation, 16)
 
 num_routing = 3
-batch_size = 8
-nb_epoch = 2
-num_classes = 8
+batch_size = 128
+nb_epoch = 5
+num_classes = 7
 #lam_recon = 0
 shift_fraction = 0
 debug = 0

@@ -39,8 +39,7 @@ if __name__ == '__main__':
 
     # Get the data:
     crop_dims = (224, 224)
-    number_of_crops = 1
-
+    number_of_crops = 4
     if(sm_train_data):
 
         directory = "../wikiart"
@@ -71,9 +70,9 @@ if __name__ == '__main__':
         Y_validation = selectData(Y_validation, 16)
 
     # Hyperparameters
-    batch_size = 8
-    nb_epoch = 30
-    patience = 20
+    batch_size = 128
+    nb_epoch = 40
+    patience = 5
     num_classes = 7
     loss = 'categorical_crossentropy'
     metrics = ['accuracy']
@@ -88,10 +87,7 @@ if __name__ == '__main__':
     # Do the transfer learning
     model = refactorOutputs(model, num_classes, True)
 
-    # for layer in model.layers:
-    #   layer.name = "Experiment_2_" + layer.name
-
-    model = freezeLayersUpTo(model, "Experiment_2_activation_13")
+    model = freezeLayersUpTo(model, "activation_13")
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
                      "../SavedData/Experiment2HistoryResnet.", False)
@@ -109,9 +105,6 @@ if __name__ == '__main__':
     opt = Adam()
     # Do the transfer learning
     model = refactorOutputs(model, num_classes, True)
-
-    #for layer in model.layers:
-     #   layer.name = "Experiment_1_" + layer.name
 
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
@@ -132,8 +125,6 @@ if __name__ == '__main__':
 
     # Do the transfer learning
     model = refactorOutputs(model, num_classes, True)
-   # for layer in model.layers:
-    #    layer.name = "Experiment_3_" + layer.name
     model = setTrainableLayers(model, 1)
     model = fineTune(model, batch_size, nb_epoch, opt, loss, metrics, patience, X_train, Y_train, X_validation,
                      Y_validation,
