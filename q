@@ -1,0 +1,555 @@
+commit a497720ac4119c6733369cbb1e9d82eff3591ff5
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Mon Dec 18 22:47:56 2017 +0000
+
+    Change to 7 classes
+
+commit 05d37a0998b42ca9f84476ddf98f5d8dab869f5d
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Mon Dec 18 22:41:56 2017 +0000
+
+    Assign variable names to load in
+
+commit 419724c245c186c8edd0690e8f82d0cbc2d66155
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Mon Dec 18 22:30:46 2017 +0000
+
+    Limit image load ins
+
+commit a01ec5f91d68fae734b4edcdf54085ab323a8d69
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Mon Dec 18 22:17:00 2017 +0000
+
+    Change np save and load directories
+
+commit 8a667017ffda6f942028d965f8ab7ac68274a729
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Fri Dec 15 00:52:03 2017 +0000
+
+    Fix scope
+
+commit 5cdd5e80fb13498fceac123787870623c4d2f8a9
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Fri Dec 15 00:49:15 2017 +0000
+
+    Fix missing arguments
+
+commit 917e6283cfdb9848bad431a149f8bd29522f3bf2
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Fri Dec 15 00:45:36 2017 +0000
+
+    Implement crop
+
+commit 0a05f48077e6a89624b6af4e7facac21865268b4
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Fri Dec 15 00:35:20 2017 +0000
+
+    Fix duplicate argument.
+
+commit 622e7ab49659d83c5f130b62549e049bd2369839
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Fri Dec 15 00:34:11 2017 +0000
+
+    Change to 7 classes + crop method after loading
+
+commit 5df2421fb8fd24a54de9aff7b7927f0e6be46d1e
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Fri Dec 15 00:25:26 2017 +0000
+
+    Change directory to test, remove select images
+
+commit f0369e0e2af92da30083ee1d2df6633be9758f96
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Thu Dec 14 23:47:05 2017 +0000
+
+    Pointillism -> Symbolism
+
+commit 9e066177c044df7c1f5c9035cfffae539e09164e
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Thu Dec 14 22:53:47 2017 +0000
+
+    Fix path
+
+commit 698afcc7e337f6318d9637c6cfa098156bc4d418
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Thu Dec 14 22:52:14 2017 +0000
+
+    Save images before cropping
+
+commit 3c40fcf130f7accf9cb418577cca47fe5320fbe8
+Author: eugval <Tjoun@eduroam-int-dhcp-97-125-143.ucl.ac.uk>
+Date:   Mon Dec 11 14:51:41 2017 +0000
+
+    Added training pergormance plots
+
+commit 50bc79bdea6314c7c4f0b038721b9c4f9170cda8
+Author: eugval <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sun Dec 10 20:33:25 2017 +0000
+
+    bug fixes
+
+commit e143326741590b6c4f0832810cfcfa0d62741092
+Author: eugval <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sun Dec 10 12:55:41 2017 +0000
+
+    Refactoring saving facilities to use pyplot instead of pylab
+
+commit ac027c9f2d3f95529d877aac349953072a89e326
+Author: eugval <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sun Dec 10 12:52:57 2017 +0000
+
+    adding saving facilities to visualisatoins
+
+commit dc2889fe90d726f4a572fa65b83c328fb4358541
+Author: eugval <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sun Dec 10 12:32:43 2017 +0000
+
+    Added verbosity and docstrings to visualisation api
+
+commit e24b6e2c6677003d7335708ed192149f642f0376
+Author: eugval <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sun Dec 10 12:05:47 2017 +0000
+
+    addind SavedData folder
+
+commit 211bee4af5e6f6dcc39d0f00e55707ed9272941f
+Merge: 200408c 27b6659
+Author: Eugene Valassakis <pe.val@icloud.com>
+Date:   Sun Dec 10 11:57:45 2017 +0000
+
+    Merge pull request #22 closes #3 from UCLIntroDLGrp/visualisation
+    
+    Visualisation
+
+commit 27b6659fba58faa3a4630b1e2a03e0a3e866755d
+Author: eugval <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sun Dec 10 11:55:41 2017 +0000
+
+    Encapsulated visualisation task and fixed dierectory of data saving in dataPreparation
+
+commit 169768d48b568d8435b3f32e865fe8cd8bd86a14
+Author: eugval <Tjoun@eduroam-int-dhcp-97-55-98.ucl.ac.uk>
+Date:   Sat Dec 9 17:12:46 2017 +0000
+
+    VGG->Resnet, SavedData folder fot he saved models and histories and visualisation script for activations
+
+commit dd7eae48a8e24c1205446c0fec497679621c1785
+Author: eugval <Tjoun@eduroam-int-dhcp-97-55-98.ucl.ac.uk>
+Date:   Sat Dec 9 15:39:36 2017 +0000
+
+    visualsiation script checkpoint
+
+commit 54ecaa8d071163e11b407682a06c5e3d37cdc7f7
+Merge: d9cba5a 200408c
+Author: eugval <Tjoun@eduroam-int-dhcp-97-55-98.ucl.ac.uk>
+Date:   Sat Dec 9 14:43:59 2017 +0000
+
+    Merge branch 'master' of https://github.com/UCLIntroDLGrp/DeepArt into visualisation
+
+commit d9cba5a7e44c2bf1a4f16377a9e62f1190ab353f
+Author: eugval <Tjoun@eduroam-int-dhcp-97-55-98.ucl.ac.uk>
+Date:   Sat Dec 9 14:43:54 2017 +0000
+
+    started visualisation script
+
+commit 200408ceb32d4671282a1802e2a28083185c5869
+Author: eugval <Tjoun@eduroam-int-dhcp-97-75-76.ucl.ac.uk>
+Date:   Fri Dec 8 14:59:57 2017 +0000
+
+    bug fixes
+
+commit 948b311b8ea7603bc3cee78cfae9b74c56f886fc
+Author: eugval <Tjoun@eduroam-int-dhcp-97-75-76.ucl.ac.uk>
+Date:   Fri Dec 8 14:58:23 2017 +0000
+
+    tired of wrting bug fixes...
+
+commit 54abbc41866072fb6fbc481595dd41b8c493083e
+Author: eugval <Tjoun@eduroam-int-dhcp-97-75-76.ucl.ac.uk>
+Date:   Fri Dec 8 14:57:06 2017 +0000
+
+    bug fixes
+
+commit 8d5bbbc0c3037f8dc12685f54c9c1403c6e4e598
+Author: eugval <Tjoun@eduroam-int-dhcp-97-75-76.ucl.ac.uk>
+Date:   Fri Dec 8 14:51:33 2017 +0000
+
+    adding more prints
+
+commit 47f56b9b765cf2cacdb1fb32091efca04d7e00fb
+Author: eugval <Tjoun@eduroam-int-dhcp-97-75-76.ucl.ac.uk>
+Date:   Fri Dec 8 14:45:17 2017 +0000
+
+    bug fixed
+
+commit 46fa49d722f641a8eef954f8a4aa1148392c62a3
+Author: eugval <Tjoun@eduroam-int-dhcp-97-75-76.ucl.ac.uk>
+Date:   Fri Dec 8 14:43:46 2017 +0000
+
+    Decoupled loading data with training
+
+commit 098a142f7cb8af3017ed04a9443db45cf17db7ff
+Author: eugval <Tjoun@eduroam-int-dhcp-97-75-76.ucl.ac.uk>
+Date:   Fri Dec 8 11:13:00 2017 +0000
+
+    changing to testing parameters
+
+commit aeada2bac9ce46f2c09d1419457c3aeadf20f7f6
+Author: eugval <Tjoun@eduroam-int-dhcp-97-6-8.ucl.ac.uk>
+Date:   Wed Dec 6 19:29:57 2017 +0000
+
+    Moving to resnet
+
+commit cb50355e9019a67a5f1e7911afed22d05911d741
+Author: eugval <Tjoun@eduroam-int-dhcp-97-6-8.ucl.ac.uk>
+Date:   Wed Dec 6 19:11:32 2017 +0000
+
+     bug  fixes
+
+commit 924472b963f1478697fa2f42eca1fd96fb32a19b
+Author: eugval <Tjoun@eduroam-int-dhcp-97-6-8.ucl.ac.uk>
+Date:   Wed Dec 6 19:06:28 2017 +0000
+
+    big fixes
+
+commit 397a9eb76416cedba0818c09e908d82f83898586
+Author: Vasileios PAPASTEFANOPOULOS <vpapaste@knuckles.cs.ucl.ac.uk>
+Date:   Wed Dec 6 14:49:47 2017 +0000
+
+    Fix reshaping and add Symbolism
+
+commit ae705297dec4459e637bef49cdcb37a224a2b878
+Author: eugval <Tjoun@eduroam-int-dhcp-97-194-174.ucl.ac.uk>
+Date:   Tue Dec 5 21:33:50 2017 +0000
+
+    First 3 experiemts completed
+
+commit 783439a78095cf863001f9d52be64e4d0433a802
+Author: eugval <Tjoun@eduroam-int-dhcp-97-194-174.ucl.ac.uk>
+Date:   Tue Dec 5 21:29:01 2017 +0000
+
+    big fixes
+
+commit 605d32215659153d742980531f985c480a3d6f33
+Author: eugval <Tjoun@eduroam-int-dhcp-97-194-174.ucl.ac.uk>
+Date:   Tue Dec 5 21:26:49 2017 +0000
+
+    bug fixes'
+
+commit ef877b815560c57e87ceae3a3991adab9e391b58
+Author: eugval <Tjoun@eduroam-int-dhcp-97-194-174.ucl.ac.uk>
+Date:   Tue Dec 5 21:23:51 2017 +0000
+
+    bug fixes
+
+commit 80f1c5568468742ca16fc409df021c9a594b7fb3
+Author: eugval <Tjoun@eduroam-int-dhcp-97-194-174.ucl.ac.uk>
+Date:   Tue Dec 5 21:23:07 2017 +0000
+
+    exp1 tweeks
+
+commit 78b8c89ee87a35ddc3dc5a8fb850ff2dc9510d31
+Author: eugval <Tjoun@eduroam-int-dhcp-97-194-174.ucl.ac.uk>
+Date:   Tue Dec 5 20:36:25 2017 +0000
+
+    Experiment 1 tweaks
+
+commit 0901f2f0bfe38a7cadbd9910c6e44cf69f98be06
+Author: eugval <Tjoun@eduroam-int-dhcp-97-194-174.ucl.ac.uk>
+Date:   Tue Dec 5 20:30:18 2017 +0000
+
+    Experiment1 finetune
+
+commit ed8294aa4aa69836950fdb858d9d2829255568c5
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Tue Dec 5 18:27:24 2017 +0000
+
+    Specify exact image folders we want to load
+
+commit 018d4e0ab71eff2ccdeec21d31c422010afe6362
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Tue Dec 5 18:21:31 2017 +0000
+
+    Add test data extracter
+
+commit 21a52782253c872207f2e667bf4b4eb089cc3bc0
+Author: eugval <Tjoun@eduroam-int-dhcp-97-194-174.ucl.ac.uk>
+Date:   Tue Dec 5 17:09:35 2017 +0000
+
+    setting up experiment 1
+
+commit 19f93e3755ed174ae8124e6ac3a2b6084eb9b516
+Merge: 8232283 6857710
+Author: eugval <Tjoun@eduroam-int-dhcp-97-119-140.ucl.ac.uk>
+Date:   Mon Dec 4 18:22:19 2017 +0000
+
+     merging with master
+
+commit 6857710ccaaf7930b1e6761e53bc26c1fc739340
+Merge: 104f501 9273919
+Author: Eugene Valassakis <pe.val@icloud.com>
+Date:   Mon Dec 4 18:13:55 2017 +0000
+
+    Merge pull request #18 from UCLIntroDLGrp/transfer-learning
+    
+    Chanded to keras implementation of VGG - Closes #13
+
+commit 92739197e1f8070d33dc2b1d32e03ee2cc578bcf
+Author: eugval <Tjoun@eduroam-int-dhcp-97-119-140.ucl.ac.uk>
+Date:   Mon Dec 4 18:12:46 2017 +0000
+
+    Chanded to keras implementation of VGG
+
+commit 104f5014e4d5c34eb57396d20e26cfc8e55c922b
+Author: eugval <Tjoun@eduroam-int-dhcp-97-119-140.ucl.ac.uk>
+Date:   Mon Dec 4 17:48:34 2017 +0000
+
+    Experiments pseudocode added'
+
+commit 8232283468382cc8eca483c63c40316b677967f7
+Author: eugval <Tjoun@eduroam-int-dhcp-97-119-140.ucl.ac.uk>
+Date:   Mon Dec 4 16:49:59 2017 +0000
+
+    experimental visualisation started
+
+commit 0b9d234aac813dce24b6d98c91922ca22a8e3217
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Fri Dec 1 15:50:43 2017 +0000
+
+    Add resizing to minimum sized images
+
+commit 521d83f3ee27555f467ddb94e30cebfd2064885c
+Author: eugval <Tjoun@eduroam-int-dhcp-97-159-213.ucl.ac.uk>
+Date:   Thu Nov 30 21:11:44 2017 +0000
+
+    epochs=20, 3layers, 5 crops
+
+commit ccd11cc7ce7fb4793f0fb9586cea61ae73fd3d3d
+Author: eugval <Tjoun@eduroam-int-dhcp-97-159-213.ucl.ac.uk>
+Date:   Thu Nov 30 21:09:35 2017 +0000
+
+    commenting selectData
+
+commit ec2920d1f8b8539a539ac86730e969e1c1c7399c
+Author: eugval <Tjoun@eduroam-int-dhcp-97-159-213.ucl.ac.uk>
+Date:   Thu Nov 30 21:07:36 2017 +0000
+
+    adding commented accuracy and increasing epochs on transfer learning script
+
+commit 25c0ad0f5f7cf2e0c73e1c01a67ce939188fa281
+Author: eugval <Tjoun@eduroam-int-dhcp-97-159-213.ucl.ac.uk>
+Date:   Thu Nov 30 20:55:50 2017 +0000
+
+    added accuracy to transferlearning script
+
+commit d07709542eb4d898884c8765549b288e9b18185d
+Author: eugval <Tjoun@eduroam-int-dhcp-97-159-213.ucl.ac.uk>
+Date:   Thu Nov 30 19:52:25 2017 +0000
+
+    Fixed imports and indentation
+
+commit 5b8534fe1f264187b4f511d2dda360f7f872df0f
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Thu Nov 30 18:27:25 2017 +0000
+
+    Fix the weird identations.
+
+commit 4b645ecb93a4372eba371fa16220c9db27c20952
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Thu Nov 30 18:25:03 2017 +0000
+
+    Add image selection
+
+commit 93e53eb670fc906d6e6976b24decbcdaed072dae
+Merge: fedeefc fcaeb59
+Author: Liam Eloie <kingliam28@ntlworld.com>
+Date:   Thu Nov 30 14:55:09 2017 +0000
+
+    Merge pull request #11 from UCLIntroDLGrp/preprocessing-requirements
+    
+    Fix overfitting issues (crops being shared in train and test sets)
+
+commit fcaeb59dcc34cbfc957ca26a5295f01f7f04917d
+Merge: 582f07e fedeefc
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Thu Nov 30 14:54:13 2017 +0000
+
+    Merge branch 'master' of https://github.com/UCLIntroDLGrp/DeepArt into preprocessing-requirements
+
+commit 582f07e9f69b3946505d41172ca25b9a4b7df70c
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Thu Nov 30 14:48:19 2017 +0000
+
+    Fix overfitting issues (crops being shared in train and test sets)
+
+commit fedeefcb2cda956f5b92d5506155a39fbdefe86d
+Merge: 615bf32 1bf400d
+Author: Liam Eloie <kingliam28@ntlworld.com>
+Date:   Thu Nov 30 14:06:18 2017 +0000
+
+    Merge pull request #9 from UCLIntroDLGrp/transfer-learning
+    
+    Transfer learning library, VGG16 model, general utilities - closes #7
+
+commit 1bf400d647d28434d563350e0881ba363f7df896
+Author: eugval <Tjoun@eduroam-int-dhcp-97-159-213.ucl.ac.uk>
+Date:   Thu Nov 30 12:43:25 2017 +0000
+
+    Folders capitalised, init files added
+
+commit ac0290897dfcfb1f96208e6e54003722ef2abb6c
+Author: eugval <Tjoun@eduroam-int-dhcp-97-159-213.ucl.ac.uk>
+Date:   Thu Nov 30 12:40:51 2017 +0000
+
+     bug fixes
+
+commit 9a9c90d28a4f78e00291f3caf79ab067f01170e0
+Merge: ffddf5a 615bf32
+Author: eugval <Tjoun@eduroam-int-dhcp-97-39-198.ucl.ac.uk>
+Date:   Wed Nov 29 19:34:37 2017 +0000
+
+    Merging masterg branch 'master' of https://github.com/UCLIntroDLGrp/DeepArt into transfer-learning
+
+commit 615bf32cd699a472a9314523c02fe6fdb857eaff
+Merge: 52bd7ec 267faea
+Author: Liam Eloie <kingliam28@ntlworld.com>
+Date:   Wed Nov 29 19:01:05 2017 +0000
+
+    Merge pull request #8 from UCLIntroDLGrp/preprocessing-requirements
+    
+    Preprocessing requirements - closes #2
+
+commit ffddf5a240d970ae65cde5a511fea6fffa047319
+Author: eugval <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Tue Nov 28 22:56:21 2017 +0000
+
+    Transfer learning library, VGG16 model, general utilities
+
+commit 267faeac85ac59bf028cb157551f17d1db1e4c7f
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Tue Nov 28 19:13:34 2017 +0000
+
+    Reshape label data into a nicer form
+
+commit 7e6fdd05d221a985264a7cec31de65ef30eb6cf5
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Tue Nov 28 18:53:26 2017 +0000
+
+    Remove test code.
+
+commit 1ec67b1927fa85be5d48c3d94fb77544877290cc
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Tue Nov 28 18:53:00 2017 +0000
+
+    Cast X and y data into numpy arrays
+
+commit a3520ad590f8c7a94ea5aa3482fa7b43b41f6835
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Tue Nov 28 18:44:30 2017 +0000
+
+    Add a one hot encoding to the labels
+
+commit ef6d71e1c08a850a7f00fc30b3df1391a884bf64
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Tue Nov 28 18:25:32 2017 +0000
+
+    Remove cached crop.py
+
+commit e86c8053315912c889faa5a1057da33ad00525e6
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Tue Nov 28 18:24:48 2017 +0000
+
+    Add loading in data + cropping data + generating train/ test sets.
+
+commit 52bd7ec55b96216ca8b67ad23c8c413515b5f06e
+Merge: 7d0c151 4f5d4d3
+Author: Eugene Valassakis <pe.val@icloud.com>
+Date:   Mon Nov 27 13:08:30 2017 +0000
+
+    Merge pull request #1 from UCLIntroDLGrp/preprocessing-requirements
+    
+    Preprocessing: cropping
+
+commit 7d0c1516121e07cb037a99651bb3345854d8148e
+Author: Pierre Valassakis <ucabpev@ad.ucl.ac.uk>
+Date:   Mon Nov 27 11:34:05 2017 +0000
+
+     adding the small subset of the data folder
+
+commit 4f5d4d354732bd0513ec6e37464324c9c221ffd3
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Sun Nov 26 19:31:53 2017 +0000
+
+    Add resizing function (correct directory)
+
+commit 97373b42f5af46595bf5a41f5665a12b5dc4ac4b
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Sun Nov 26 19:28:12 2017 +0000
+
+    Remove root cached crop.py AGAIN...
+
+commit 98b6168c646ff9f886f3713bfda4bbe8209123da
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Sun Nov 26 19:25:27 2017 +0000
+
+    Add resizing function.
+
+commit b45a3558449b40ad489a1b98b8e5ce79c706b005
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Sun Nov 26 18:16:34 2017 +0000
+
+    Remove crop.py from root cache.
+
+commit ed2e717c54c2acd00613030b9bc9bdb18cb99c3a
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Sun Nov 26 18:15:28 2017 +0000
+
+    Move crop.py into preprocessing.
+
+commit 7b4dbae7476cc5c410d512641a4c5632accd7319
+Author: Liam <kingliam28@ntlworld.com>
+Date:   Sun Nov 26 18:11:58 2017 +0000
+
+    Add cropping function to generate crops of an image.
+
+commit 60e93b35f12c9b736e5ce6299590ee50ddf6d546
+Author: Eugene Valassakis <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sat Nov 25 14:11:54 2017 +0000
+
+    Markup fixes
+
+commit b891eed86a795e649fd45bc612bd30ee458eb067
+Author: Eugene Valassakis <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sat Nov 25 14:07:17 2017 +0000
+
+    Markup fixes
+
+commit cbf6bacf374c194ee90b1a6acb1bca8b57cf9caa
+Author: Eugene Valassakis <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sat Nov 25 14:04:52 2017 +0000
+
+    Markup fixes
+
+commit d2e9c87c9e0b439bb926353c54dca8a4b8a12742
+Author: Eugene Valassakis <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sat Nov 25 13:45:13 2017 +0000
+
+    some clarification
+
+commit 14fa8e7c0cc0793b5ea4e6ee22f4c78e049af236
+Author: Eugene Valassakis <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sat Nov 25 13:38:49 2017 +0000
+
+    Style fixes in ReadMe
+
+commit f59fb22854ab6d331990399b3295c7ab8baf39ad
+Author: Eugene Valassakis <Tjoun@Eugenes-MacBook-Pro.local>
+Date:   Sat Nov 25 13:29:21 2017 +0000
+
+    Requirements and Git workflow additions
+
+commit ac1048c6f13c41ade03e2f27575300c82419c3a8
+Author: eugval <pe.val@icloud.com>
+Date:   Sat Nov 25 12:07:16 2017 +0000
+
+    Initial commit

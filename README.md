@@ -9,7 +9,7 @@ Make sure you install the following on your local machine
 
 
 ## Setup:
-1. Clone the github repository using git:
+1. Clone the giithub repository using git:
     - go on the github repo, click on clone or download and copy the repo url
     - Open an terminal and type ```git clone [copied repo]```
 2. Create a [virtual env](https://virtualenv.pypa.io/en/stable/userguide/)
