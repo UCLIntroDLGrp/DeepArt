@@ -8,7 +8,7 @@ from Visualisation.layerVisualisation import visualiseDenseLayer, visualiseCovol
 MODEL_METADATA =[('../../Experiment1Resnet.h5',"Experiment_1_Resnet_Output_Visualisation.png"),('../../Experiment2Resnet.h5',"Experiment_2_Resnet_Output_Visualisation.png"),('../../Experiment3Resnet.h5',"Experiment_3_Resnet_Output_Visualisation.png")]
 
 for model_file, figure_save_name in MODEL_METADATA:
-    print("Loading the model from {}...".formal(model_file))
+    print("Loading the model from {}...".format(model_file))
     model = load_model(model_file)
 
     print("Visualising the dense layer...")
