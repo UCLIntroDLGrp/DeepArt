@@ -5,7 +5,7 @@ from keras.models import load_model
 from Visualisation.layerVisualisation import visualiseDenseLayer, visualiseCovolutionLayer
 
 
-MODEL_METADATA =[('../SavedData/Experiment1Resnet.h5',"Experiment_1_Resnet_Output_Visualisation.png"),('../SavedData/Experiment2Resnet.h5',"Experiment_2_Resnet_Output_Visualisation.png"),('../SavedData/Experiment3Resnet.h5',"Experiment_3_Resnet_Output_Visualisation.png")]
+MODEL_METADATA =[('../../Experiment1Resnet.h5',"Experiment_1_Resnet_Output_Visualisation.png"),('../../Experiment2Resnet.h5',"Experiment_2_Resnet_Output_Visualisation.png"),('../../Experiment3Resnet.h5',"Experiment_3_Resnet_Output_Visualisation.png")]
 
 for model_file, figure_save_name in MODEL_METADATA:
     print("Loading the model from {}...".formal(model_file))
