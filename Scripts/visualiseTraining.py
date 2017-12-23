@@ -7,7 +7,7 @@ from Visualisation.trainingVisualisation import TrainingTracker
 
 # List of (file with history, name to save plot ) tuble entries
 #HISTORY_METADATA = [ ("../SavedData/Experiment2HistoryResnet.pickle", "Experiment2HistoryPlotsResnet" ) ]
-HISTORY_METADATA =[('../../Experiment1Resnet.h5',"Experiment_1_Resnet_Output_Visualisation.png"),('../../Experiment2Resnet.h5',"Experiment_2_Resnet_Output_Visualisation.png"),('../../Experiment3Resnet.h5',"Experiment_3_Resnet_Output_Visualisation.png")]
+HISTORY_METADATA =[('../../Experiment1HistoryResnet.pickle',"Experiment1HistoryPlotsResnet.png"),('../../Experiment2HistoryResnet.pickle',"Experiment2HistoryPlotsResnet.png"),('../../Experiment3HistoryResnet.pickle',"Experiment3HistoryPlotsResnet.png")]
 
 for file_to_load , save_name in HISTORY_METADATA:
     print("Making the plot for {}".format(file_to_load))
