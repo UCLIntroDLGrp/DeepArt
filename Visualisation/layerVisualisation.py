@@ -29,12 +29,13 @@ def visualiseDenseLayer(model,layer_name,output_classes, verbose, save=False):
 
 
     stitched = utils.stitch_images(vis_images, cols=4)
-    plt.figure()
-    plt.axis('off')
     plt.imshow(stitched)
+
     if(save):
         plt.savefig("../SavedData/"+ save)
     else:
+        plt.figure()
+        plt.axis('off')
         plt.show()
 
 
