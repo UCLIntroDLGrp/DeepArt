@@ -1,5 +1,6 @@
 from vis.utils import utils
 from vis.visualization import  visualize_activation
+import matplotlib
 from matplotlib import pyplot as plt
 from keras import activations
 from vis.input_modifiers import Jitter
@@ -29,11 +30,11 @@ def visualiseDenseLayer(model,layer_name,output_classes, verbose, save=False):
 
 
     stitched = utils.stitch_images(vis_images, cols=4)
-    plt.imshow(stitched)
 
     if(save):
-        plt.savefig("../SavedData/"+ save)
+        matplotlib.image.imsave("../SavedData/"+ save, stitched)
     else:
+        plt.imshow(stitched)
         plt.figure()
         plt.axis('off')
         plt.show()
