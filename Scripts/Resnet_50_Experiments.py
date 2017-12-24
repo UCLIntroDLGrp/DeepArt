@@ -25,6 +25,7 @@ import os
 import numpy as np
 
 sys.path.insert(0, os.path.realpath('../'))
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2"
 
 from keras.optimizers import Adam
 
@@ -59,8 +60,13 @@ if __name__ == '__main__':
         Y_train = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_train.npy")
         Y_validation = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_validation.npy")
 
-        X_train, X_validation, Y_train, Y_validation = crop_data_from_load(
-            X_train, X_validation, Y_train, Y_validation, crop_dims, number_of_crops)
+        #X_train = np.load("../SavedData/X_train.npy")
+        #X_validation = np.load("../SavedData/X_validation.npy")
+        #Y_train = np.load("../SavedData/Y_train.npy")
+        #Y_validation = np.load("../SavedData/Y_validation.npy")
+
+
+        X_train, X_validation, Y_train, Y_validation = crop_data_from_load(X_train, X_validation, Y_train, Y_validation, crop_dims, number_of_crops)
 
     if (debug_data):
         # Select only few training examples - uncomment for quick testing
