@@ -25,7 +25,7 @@ import os
 import numpy as np
 
 sys.path.insert(0, os.path.realpath('../'))
-os.environ["CUDA_VISIBLE_DEVICES"] = "1,2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "2,3"
 
 from keras.optimizers import Adam
 
