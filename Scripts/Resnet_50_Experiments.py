@@ -25,7 +25,7 @@ import os
 import numpy as np
 
 sys.path.insert(0, os.path.realpath('../'))
-os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1,2"
 
 from keras.optimizers import Adam
 
@@ -102,7 +102,7 @@ if __name__ == '__main__':
 
 ###########
 
-
+'''
 ####### Experiment 1
 
 
@@ -140,3 +140,4 @@ if __name__ == '__main__':
 ###########
 
 
+'''
