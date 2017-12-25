@@ -78,7 +78,7 @@ if __name__ == '__main__':
     # Hyperparameters
     batch_size = 128
     nb_epoch = 40
-    patience = 5
+    patience = 4
     num_classes = 7
     loss = 'categorical_crossentropy'
     metrics = ['accuracy']
