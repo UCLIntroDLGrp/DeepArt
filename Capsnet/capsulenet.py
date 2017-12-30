@@ -21,7 +21,7 @@ from keras import layers, models
 from keras import backend as K
 #from keras.utils import to_categorical
 import numpy as np
-from capsnet.capsulelayers import CapsuleLayer, PrimaryCap, Length, Mask
+from Capsnet.capsulelayers import CapsuleLayer, PrimaryCap, Length, Mask
 from keras.preprocessing.image import ImageDataGenerator
 
 

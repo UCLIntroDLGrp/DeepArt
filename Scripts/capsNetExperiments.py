@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.insert(0, os.path.realpath('../'))
-from capsnet.capsulenet import CapsNet, train
+from Capsnet.capsulenet import CapsNet, train
 import numpy as np
 from Utilities.utilities import selectData
 from Preprocessing.preprocessing import generate_cropped_training_and_test_data,crop_data_from_load
