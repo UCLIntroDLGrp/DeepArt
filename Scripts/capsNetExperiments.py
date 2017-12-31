@@ -8,7 +8,7 @@ from Preprocessing.preprocessing import generate_cropped_training_and_test_data,
 from pickle import dump
 
 sm_train_data = False
-debug_data = True
+debug_data = False
 
 crop_dims = (224, 224)
 number_of_crops = 4
@@ -29,36 +29,47 @@ if(sm_train_data):
                                                                                10)
 
 else:
-    X_train = np.load("../SavedData/X_train.npy")
-    X_validation = np.load("../SavedData/X_validation.npy")
-    Y_train = np.load("../SavedData/Y_train.npy")
-    Y_validation = np.load("../SavedData/Y_validation.npy")
+    if(not debug_data):
+        X_train = np.load("../../../../../ml/2017/DeepArt/SavedData/X_train.npy")
+        X_validation = np.load("../../../../../ml/2017/DeepArt/SavedData/X_validation.npy")
+        Y_train = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_train.npy")
+        Y_validation = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_validation.npy")
 
-    #X_train = np.load("../../../../../ml/2017/DeepArt/SavedData/X_train.npy")
-    #X_validation = np.load("../../../../../ml/2017/DeepArt/SavedData/X_validation.npy")
-    #Y_train = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_train.npy")
-    #Y_validation = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_validation.npy")
+        X_train, X_validation, Y_train, Y_validation = crop_data_from_load(
+            X_train, X_validation, Y_train, Y_validation, crop_dims, number_of_crops)
 
-#    X_train, X_validation, Y_train, Y_validation = crop_data_from_load(
- #       X_train, X_validation, Y_train, Y_validation, crop_dims, number_of_crops)
+    else:
+        X_train = np.load("../SavedData/X_train.npy")
+        X_validation = np.load("../SavedData/X_validation.npy")
+        Y_train = np.load("../SavedData/Y_train.npy")
+        Y_validation = np.load("../SavedData/Y_validation.npy")
 
 
 if (debug_data):
     # Select only few training examples - uncomment for quick testing
-    X_train = selectData(X_train, 32)
-    Y_train = selectData(Y_train, 32)
-    X_validation = selectData(X_validation, 16)
-    Y_validation = selectData(Y_validation, 16)
+    X_train = selectData(X_train, 16)
+    Y_train = selectData(Y_train, 16)
+    X_validation = selectData(X_validation, 8)
+    Y_validation = selectData(Y_validation, 8)
 
-num_routing = 3
-batch_size = 8
-nb_epoch = 5
-num_classes = 8
-#lam_recon = 0
-shift_fraction = 0
-debug = 0
-augment_data = False
-
+if(not debug_data):
+    num_routing = 3
+    batch_size = 128
+    nb_epoch = 5
+    num_classes = 7
+    #lam_recon = 0
+    shift_fraction = 0
+    debug = 0
+    augment_data = False
+else:
+    num_routing = 3
+    batch_size = 4
+    nb_epoch = 1
+    num_classes = 8
+    # lam_recon = 0
+    shift_fraction = 0
+    debug = 0
+    augment_data = False
 
 class Args(object):
     def __init__(self , num_routing,batch_size, nb_epoch,num_classes ,shift_fraction,debug, augment_data):#lam_recon,
@@ -86,6 +97,7 @@ model , history = train(model=model, data=((X_train, Y_train), (X_validation, Y_
 print("Finishing Training")
 
 model.save("../SavedData/Experiment1Capsnet.h5")
+model.save_weights("../SavedData/Experiment1CapsnetWeights.h5")
 pickle_out = open("../SavedData/Experiment1CapsnetHistory.pickle", "wb")
 dump(history.history, pickle_out)
 pickle_out.close()
