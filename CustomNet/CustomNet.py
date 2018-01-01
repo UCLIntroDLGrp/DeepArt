@@ -2,23 +2,24 @@ import sys
 import os
 sys.path.insert(0, os.path.realpath('../'))
 from keras import layers, models
+from keras import backend as K
 
 from keras.applications.resnet50 import ResNet50
 from TransferLearning.transferLearning import refactorOutputs, setTrainableLayers, freezeLayersUpTo, fineTune
 from Capsnet.capsulelayers import PrimaryCap, CapsuleLayer,Length
 
 
-def customModel():
-    inputShape = (224,224,3)
+def customModel(inputShape, num_classes):
     resnet = ResNet50(include_top=False, weights='imagenet',input_shape=inputShape)
+    resnet.layers.pop()
 
-    resnet.summary()
+    freezeLayersUpTo(resnet,None)
 
     # Layer 2: Conv2D layer with `squash` activation, then reshape to [None, num_capsule, dim_vector]
-    primarycaps = PrimaryCap(resnet.layers[-1].output, dim_vector=8, n_channels=32, kernel_size=9, strides=2, padding='valid')
+    primarycaps = PrimaryCap(resnet.layers[-1].output, dim_vector=8, n_channels=32, kernel_size=4, strides=2, padding='valid')
 
     # Layer 3: Capsule layer. Routing algorithm works here.
-    digitcaps = CapsuleLayer(num_capsule=7, dim_vector=16, num_routing=3, name='digitcaps')(
+    digitcaps = CapsuleLayer(num_capsule=num_classes, dim_vector=16, num_routing=3, name='digitcaps')(
         primarycaps)
 
     # Layer 4: This is an auxiliary layer to replace each capsule with its length. Just to match the true label's shape.
@@ -29,34 +30,48 @@ def customModel():
     return models.Model(resnet.input, [out_caps])  # , x_recon
 
 
-custom = customModel()
-custom.summary()
-'''
-    def CapsNet(input_shape, n_class, num_routing):
-        """
-        A Capsule Network on MNIST.
-        :param input_shape: data shape, 4d, [None, width, height, channels]
-        :param n_class: number of classes
-        :param num_routing: number of routing iterations
-        :return: A Keras Model with 2 inputs and 2 outputs
-        """
-        x = layers.Input(shape=input_shape)
 
-        # Layer 1: Just a conventional Conv2D layer
-        conv1 = layers.Conv2D(filters=256, kernel_size=9, strides=1, padding='valid', activation='relu', name='conv1')(
-            x)
 
-        # Layer 2: Conv2D layer with `squash` activation, then reshape to [None, num_capsule, dim_vector]
-        primarycaps = PrimaryCap(conv1, dim_vector=8, n_channels=32, kernel_size=9, strides=2, padding='valid')
 
-        # Layer 3: Capsule layer. Routing algorithm works here.
-        digitcaps = CapsuleLayer(num_capsule=n_class, dim_vector=16, num_routing=num_routing, name='digitcaps')(
-            primarycaps)
+def margin_loss(y_true, y_pred):
+    """
+    Margin loss for Eq.(4). When y_true[i, :] contains not just one `1`, this loss should work too. Not test it.
+    :param y_true: [None, n_classes]
+    :param y_pred: [None, num_capsule]
+    :return: a scalar loss value.
+    """
+    L = y_true * K.square(K.maximum(0., 0.9 - y_pred)) + \
+        0.5 * (1 - y_true) * K.square(K.maximum(0., y_pred - 0.1))
 
-        # Layer 4: This is an auxiliary layer to replace each capsule with its length. Just to match the true label's shape.
-        # If using tensorflow, this will not be necessary. :)
-        out_caps = Length(name='out_caps')(digitcaps)
+    return K.mean(K.sum(L, 1))
 
-        # two-input-two-output keras Model
-        return models.Model(x, [out_caps])  # , x_recon
-'''
+
+
+
+
+def train(model, data, args):
+    """
+    Training a CapsuleNet
+    :param model: the CapsuleNet model
+    :param data: a tuple containing training and testing data, like `((x_train, y_train), (x_test, y_test))`
+    :param args: arguments
+    :return: The trained model
+    """
+    # unpacking the data
+    (x_train, y_train), (x_test, y_test) = data
+
+    # compile the model
+    print("compiling model")
+    model.compile(optimizer='adam',
+                  loss=[margin_loss], # 'mse'
+                  metrics={'out_caps': 'accuracy'}) #loss_weights=[1., args.lam_recon],
+
+    print("Start training without augmentation")
+    # Training without data augmentation:
+    history =  model.fit(x_train, y_train, batch_size=args.batch_size, epochs=args.epochs,
+              validation_data=(x_test, y_test)) #callbacks=[log, tb, checkpoint]
+
+
+
+    return model, history
+
