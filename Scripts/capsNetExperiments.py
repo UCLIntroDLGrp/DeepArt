@@ -10,7 +10,7 @@ from pickle import dump
 sm_train_data = False
 debug_data = False
 
-crop_dims = (224, 224)
+crop_dims = (40, 40)
 number_of_crops = 4
 
 
@@ -54,10 +54,9 @@ if (debug_data):
 
 if(not debug_data):
     num_routing = 3
-    batch_size = 128
+    batch_size = 32
     nb_epoch = 5
     num_classes = 7
-    #lam_recon = 0
     shift_fraction = 0
     debug = 0
     augment_data = False
@@ -66,7 +65,6 @@ else:
     batch_size = 4
     nb_epoch = 1
     num_classes = 8
-    # lam_recon = 0
     shift_fraction = 0
     debug = 0
     augment_data = False
