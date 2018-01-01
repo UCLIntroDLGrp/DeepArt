@@ -6,6 +6,7 @@ import numpy as np
 from Utilities.utilities import selectData
 from Preprocessing.preprocessing import generate_cropped_training_and_test_data,crop_data_from_load
 from pickle import dump
+os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"
 
 sm_train_data = False
 debug_data = False
