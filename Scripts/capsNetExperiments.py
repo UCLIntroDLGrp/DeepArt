@@ -9,7 +9,7 @@ from pickle import dump
 os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"
 
 sm_train_data = False
-debug_data = False
+debug_data = True
 
 crop_dims = (40, 40)
 number_of_crops = 4
@@ -44,6 +44,8 @@ else:
         X_validation = np.load("../SavedData/X_validation.npy")
         Y_train = np.load("../SavedData/Y_train.npy")
         Y_validation = np.load("../SavedData/Y_validation.npy")
+        X_train, X_validation, Y_train, Y_validation = crop_data_from_load(
+            X_train, X_validation, Y_train, Y_validation, crop_dims, number_of_crops)
 
 
 if (debug_data):
@@ -85,7 +87,7 @@ class Args(object):
 args = Args(num_classes,batch_size,nb_epoch,num_classes,shift_fraction,debug,augment_data)#lam_recon
 
 
-model = CapsNet(input_shape=[224, 224, 3],
+model = CapsNet(input_shape=[crop_dims[0], crop_dims[1], 3],
                 n_class=num_classes,
                 num_routing=num_routing)
 
