@@ -14,7 +14,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"
 
 
 sm_train_data = False
-debug_data = True
+debug_data = False
 
 
 #####################################
@@ -69,7 +69,7 @@ if (debug_data):
 
 if(not debug_data):
     batch_size = 32
-    nb_epoch = 5
+    nb_epoch = 10
     num_classes = 7
 else:
     batch_size = 4
