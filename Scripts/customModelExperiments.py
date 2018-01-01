@@ -16,10 +16,12 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"
 sm_train_data = False
 debug_data = True
 
-crop_dims = (224, 224)
+
+#####################################
+crop_dims = (224, 224)  ### AT MINIMUM must be (197,197)
 input_shape = (224,224,3) #MUST MATCH CROP DIMS
 number_of_crops = 4
-
+####################################
 
 if(sm_train_data):
 
@@ -63,22 +65,17 @@ if (debug_data):
 
 
 
+##########################
+
 if(not debug_data):
-    #num_routing = 3
     batch_size = 32
     nb_epoch = 5
     num_classes = 7
-    #shift_fraction = 0
-    #debug = 0
-    #augment_data = False
 else:
-   # num_routing = 3
     batch_size = 4
     nb_epoch = 1
     num_classes = 8
-   # shift_fraction = 0
-   # debug = 0
-   # augment_data = False
+############################
 
 
 class Args(object):
