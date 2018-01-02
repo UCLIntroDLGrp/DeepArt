@@ -21,6 +21,6 @@ for model_file, figure_save_name in MODEL_METADATA:
     model.load_weights(model_file)
 
     print("Visualising the dense layer...")
-    selected_layer = 'output_predictions'
+    selected_layer = 'out_caps'
     output_classes = 7
     visualiseDenseLayer(model,selected_layer,output_classes, False, save=figure_save_name)
