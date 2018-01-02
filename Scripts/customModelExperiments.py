@@ -95,8 +95,8 @@ model , history = train(model=model, data=((X_train, Y_train), (X_validation, Y_
 
 print("Finishing Training")
 
-model.save("../SavedData/Experiment1CustomNet.h5")
-model.save_weights("../SavedData/Experiment1CustomNetWeights.h5")
-pickle_out = open("../SavedData/Experiment1CustomNetHistory.pickle", "wb")
+model.save("../SavedData/Experiment1CustomNetWithDropout.h5")
+model.save_weights("../SavedData/Experiment1CustomNetWeightsWithDropout.h5")
+pickle_out = open("../SavedData/Experiment1CustomNetHistoryWithDropout.pickle", "wb")
 dump(history.history, pickle_out)
 pickle_out.close()
