@@ -3,13 +3,14 @@ import os
 sys.path.insert(0, os.path.realpath('../'))
 from keras import layers, models
 from keras import backend as K
+from keras.layers import Dropout
 
 from keras.applications.resnet50 import ResNet50
 from TransferLearning.transferLearning import refactorOutputs, setTrainableLayers, freezeLayersUpTo, fineTune
 from Capsnet.capsulelayers import PrimaryCap, CapsuleLayer,Length
 
 
-def customModel(inputShape, num_classes):
+def customModel(inputShape, num_classes, dropout):
     resnet = ResNet50(include_top=False, weights='imagenet',input_shape=inputShape)
     resnet.layers.pop()
 
@@ -17,14 +18,27 @@ def customModel(inputShape, num_classes):
 
     # Layer 2: Conv2D layer with `squash` activation, then reshape to [None, num_capsule, dim_vector]
     primarycaps = PrimaryCap(resnet.layers[-1].output, dim_vector=8, n_channels=32, kernel_size=4, strides=2, padding='valid')
+    if(dropout):
+        dropoutCaps = Dropout(0.5)(primarycaps)
+        # Layer 3: Capsule layer. Routing algorithm works here.
+        digitcaps = CapsuleLayer(num_capsule=num_classes, dim_vector=16, num_routing=3, name='digitcaps')(
+            dropoutCaps)
+    else:
+        # Layer 3: Capsule layer. Routing algorithm works here.
+        digitcaps = CapsuleLayer(num_capsule=num_classes, dim_vector=16, num_routing=3, name='digitcaps')(
+            primarycaps)
 
-    # Layer 3: Capsule layer. Routing algorithm works here.
-    digitcaps = CapsuleLayer(num_capsule=num_classes, dim_vector=16, num_routing=3, name='digitcaps')(
-        primarycaps)
+    if(dropout):
+        dropoutCaps2 = Dropout(0.5)(digitcaps)
 
-    # Layer 4: This is an auxiliary layer to replace each capsule with its length. Just to match the true label's shape.
-    # If using tensorflow, this will not be necessary. :)
-    out_caps = Length(name='out_caps')(digitcaps)
+        # Layer 4: This is an auxiliary layer to replace each capsule with its length. Just to match the true label's shape.
+        # If using tensorflow, this will not be necessary. :)
+        out_caps = Length(name='out_caps')(dropoutCaps2)
+
+    else:
+        # Layer 4: This is an auxiliary layer to replace each capsule with its length. Just to match the true label's shape.
+        # If using tensorflow, this will not be necessary. :)
+        out_caps = Length(name='out_caps')(digitcaps)
 
     # two-input-two-output keras Model
     return models.Model(resnet.input, [out_caps])  # , x_recon

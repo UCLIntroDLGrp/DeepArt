@@ -21,6 +21,7 @@ debug_data = False
 crop_dims = (224, 224)  ### AT MINIMUM must be (197,197)
 input_shape = (224,224,3) #MUST MATCH CROP DIMS
 number_of_crops = 4
+dropout = True
 ####################################
 
 if(sm_train_data):
@@ -86,7 +87,7 @@ class Args(object):
 
 args = Args(batch_size,nb_epoch)
 
-model = customModel(input_shape,num_classes)
+model = customModel(input_shape,num_classes,dropout)
 
 model.summary()
 
