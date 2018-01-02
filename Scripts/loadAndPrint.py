@@ -5,7 +5,7 @@ from keras.models import load_model
 
 
 #MODEL_METADATA =['../../Experiment1Resnet.h5','../../Experiment2Resnet.h5','../../Experiment3Resnet.h5']
-MODEL_METADATA =['../SavedData/Experiment1Resnet.h5','../SavedData/Experiment2Resnet.h5','../SavedData/Experiment3Resnet.h5']
+MODEL_METADATA =['../../Experiment1Resnet.h5','../../Experiment2Resnet.h5','../../Experiment3Resnet.h5']
 
 
 if(len(sys.argv)>1):
