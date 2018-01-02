@@ -50,13 +50,14 @@ def visualiseGenericLayer(model,layer_name,output_classes, verbose, save=False):
     :param verbose: Print statements of progress.
     :return: N/A
     '''
+    print("HEEEEREEEEEE")
     layer_index = utils.find_layer_idx(model, layer_name)
-    print("HEEEREE")
+
     vis_images = []
     for filter_index in range(0, output_classes):
         if(verbose):
             print("Preparing Visualisation for class {} in layer {}".format(filter_index,layer_name))
-        visualisation = visualize_activation(model, layer_index, filter_index, max_iter=500)
+        visualisation = visualize_activation(model, layer_index, filter_index, max_iter=500, input_modifiers=[Jitter(16)])
 
         img = utils.draw_text(visualisation, 'Class {}'.format(filter_index))
         vis_images.append(img)
