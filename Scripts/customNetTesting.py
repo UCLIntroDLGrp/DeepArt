@@ -57,7 +57,7 @@ for model_file, test_value_save_name in MODEL_METADATA:
         num_routing = 3
 
     #model = load_model(model_file)
-    model = customModel(input_shape, num_classes)
+    model = customModel(input_shape, num_classes,False)
 
 
     model.load_weights(model_file)

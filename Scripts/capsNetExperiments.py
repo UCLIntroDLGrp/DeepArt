@@ -11,7 +11,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"
 sm_train_data = False
 debug_data = False
 
-crop_dims = (224, 224)
+crop_dims = (100, 100)
 number_of_crops = 4
 
 
@@ -97,9 +97,9 @@ model , history = train(model=model, data=((X_train, Y_train), (X_validation, Y_
 
 print("Finishing Training")
 
-model.save("../SavedData/Experiment1Capsnet224224.h5")
-model.save_weights("../SavedData/Experiment1CapsnetWeights224224.h5")
-pickle_out = open("../SavedData/Experiment1CapsnetHistory224224.pickle", "wb")
+model.save("../SavedData/Experiment1Capsnet100100.h5")
+model.save_weights("../SavedData/Experiment1CapsnetWeights100100.h5")
+pickle_out = open("../SavedData/Experiment1CapsnetHistory100100.pickle", "wb")
 dump(history.history, pickle_out)
 pickle_out.close()
 

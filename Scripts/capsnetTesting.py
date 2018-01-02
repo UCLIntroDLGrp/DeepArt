@@ -8,6 +8,8 @@ import tensorflow as tf
 
 sys.path.insert(0, os.path.realpath('../'))
 
+input_shape = [224,224,3]
+
 debug = True
 
 def test(model, data):
@@ -54,7 +56,7 @@ for model_file, test_value_save_name in MODEL_METADATA:
         num_routing = 3
 
     #model = load_model(model_file)
-    model = CapsNet(input_shape=[224, 224, 3],
+    model = CapsNet(input_shape=input_shape,
                 n_class=num_classes,
                 num_routing=num_routing)
 
