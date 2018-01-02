@@ -23,4 +23,4 @@ for model_file, figure_save_name in MODEL_METADATA:
     print("Visualising the dense layer...")
     selected_layer = 'out_caps'
     output_classes = 7
-    visualiseGenericLayer(model,selected_layer,output_classes, False, save=figure_save_name)
+    visualiseGenericLayer(model,selected_layer,output_classes, True, save=figure_save_name)
