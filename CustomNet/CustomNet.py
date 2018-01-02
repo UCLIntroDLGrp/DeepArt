@@ -28,17 +28,10 @@ def customModel(inputShape, num_classes, dropout):
         digitcaps = CapsuleLayer(num_capsule=num_classes, dim_vector=16, num_routing=3, name='digitcaps')(
             primarycaps)
 
-    if(dropout):
-        dropoutCaps2 = Dropout(0.5)(digitcaps)
 
-        # Layer 4: This is an auxiliary layer to replace each capsule with its length. Just to match the true label's shape.
-        # If using tensorflow, this will not be necessary. :)
-        out_caps = Length(name='out_caps')(dropoutCaps2)
-
-    else:
-        # Layer 4: This is an auxiliary layer to replace each capsule with its length. Just to match the true label's shape.
-        # If using tensorflow, this will not be necessary. :)
-        out_caps = Length(name='out_caps')(digitcaps)
+    # Layer 4: This is an auxiliary layer to replace each capsule with its length. Just to match the true label's shape.
+    # If using tensorflow, this will not be necessary. :)
+    out_caps = Length(name='out_caps')(digitcaps)
 
     # two-input-two-output keras Model
     return models.Model(resnet.input, [out_caps])  # , x_recon
