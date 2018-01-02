@@ -1,5 +1,6 @@
 import sys
 import os
+sys.path.insert(0, os.path.realpath('../'))
 import numpy as np
 from Capsnet.capsulenet import margin_loss
 from Capsnet.capsnetTesting import getAcc

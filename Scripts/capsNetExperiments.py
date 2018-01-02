@@ -9,9 +9,9 @@ from pickle import dump
 os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"
 
 sm_train_data = False
-debug_data = True
+debug_data = False
 
-crop_dims = (40, 40)
+crop_dims = (224, 224)
 number_of_crops = 4
 
 
@@ -57,7 +57,7 @@ if (debug_data):
 
 if(not debug_data):
     num_routing = 3
-    batch_size = 32
+    batch_size = 16
     nb_epoch = 5
     num_classes = 7
     shift_fraction = 0
@@ -97,9 +97,9 @@ model , history = train(model=model, data=((X_train, Y_train), (X_validation, Y_
 
 print("Finishing Training")
 
-model.save("../SavedData/Experiment1Capsnet.h5")
-model.save_weights("../SavedData/Experiment1CapsnetWeights.h5")
-pickle_out = open("../SavedData/Experiment1CapsnetHistory.pickle", "wb")
+model.save("../SavedData/Experiment1Capsnet224224.h5")
+model.save_weights("../SavedData/Experiment1CapsnetWeights224224.h5")
+pickle_out = open("../SavedData/Experiment1CapsnetHistory224224.pickle", "wb")
 dump(history.history, pickle_out)
 pickle_out.close()
 
