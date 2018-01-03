@@ -6,7 +6,7 @@ import numpy as np
 from Utilities.utilities import selectData
 from Preprocessing.preprocessing import generate_cropped_training_and_test_data,crop_data_from_load
 from pickle import dump
-os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2"
 
 sm_train_data = False
 debug_data = False
@@ -57,8 +57,8 @@ if (debug_data):
 
 if(not debug_data):
     num_routing = 3
-    batch_size = 16
-    nb_epoch = 5
+    batch_size = 32
+    nb_epoch = 15
     num_classes = 7
     shift_fraction = 0
     debug = 0
