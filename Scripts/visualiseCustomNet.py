@@ -3,10 +3,10 @@ import sys
 sys.path.insert(0, os.path.realpath('../'))
 from Visualisation.layerVisualisation import visualiseGenericLayer
 from CustomNet.CustomNet import customModel
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
 
-MODEL_METADATA =[('../SavedData/Experiment1CustomNet.h5',"Experiment_1_customNetNoDropout_Output_Visualisation.png")]
+MODEL_METADATA =[('../SavedData/Experiment1CustomNetWeightsWithDropout.h5',"Experiment_1_customNetWithDropout_Output_Visualisation.png")]
 
 num_classes = 7
 input_shape = [224,224,3]
