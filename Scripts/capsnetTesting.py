@@ -9,7 +9,7 @@ import tensorflow as tf
 sys.path.insert(0, os.path.realpath('../'))
 
 input_shape = [224,224,3]
-
+os.environ["CUDA_VISIBLE_DEVICES"] = "2,3"
 debug = False
 
 def test(model, data):

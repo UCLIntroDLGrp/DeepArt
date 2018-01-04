@@ -5,7 +5,7 @@ from keras.models import load_model
 
 sys.path.insert(0, os.path.realpath('../'))
 
-
+os.environ["CUDA_VISIBLE_DEVICES"] = "2,3"
 debug=False
 SAVE_DIRECTORY = "../SavedData/"
 
