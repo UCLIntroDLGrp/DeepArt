@@ -306,6 +306,30 @@ def crop_data_from_load(X_train, X_test, y_train, y_test, crop_dimensions, numbe
 
 
 
+def crop_data_from_load2(X_train, y_train, crop_dimensions, number_of_crops):
+    cropped_images_train = []
+    cropped_labels_train = []
+    print("Loaded Uncropped images..")
+    print("Cropping....")
+    print("Croping training images..")
+    count = 0
+    for image, label in zip(X_train, y_train):
+        cropped = generate_random_crops(
+            image, crop_dimensions, number_of_crops)
+        for crop in cropped:
+            cropped_images_train.append(crop)
+            cropped_labels_train.append(label)
+            count += 1
+            if count > 1000:
+                print("Cropped 1000 Training Images")
+                count = 0
+
+
+    return np.array(cropped_images_train),  np.array(cropped_labels_train),
+
+
+
+
 def generate_cropped_training_and_test_data(directory_path, crop_dimensions, number_of_crops, test_size, train_size,
                                             image_selection_percent=10):
     '''

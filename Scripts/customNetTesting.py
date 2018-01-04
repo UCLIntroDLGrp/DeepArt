@@ -6,6 +6,7 @@ from Capsnet.capsulenet import margin_loss
 from Capsnet.capsnetTesting import getAcc
 from CustomNet.CustomNet import customModel
 import tensorflow as tf
+from Preprocessing.preprocessing import crop_data_from_load2
 
 sys.path.insert(0, os.path.realpath('../'))
 os.environ["CUDA_VISIBLE_DEVICES"] = "2,3"
@@ -29,6 +30,8 @@ input_shape = [224,224,3]
 if(not debug):
     X_test = np.load("../../../../../ml/2017/DeepArt/SavedData/X_test.npy")
     Y_test = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_test.npy")
+    X_test,Y_test = crop_data_from_load2(X_test,Y_test,(224,224),2)
+
 else:
     #Debugging data
     X_test = np.load("../SavedData/X_train.npy")

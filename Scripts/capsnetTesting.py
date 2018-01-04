@@ -5,6 +5,7 @@ from Capsnet.capsulenet import margin_loss
 from Capsnet.capsnetTesting import getAcc
 from Capsnet.capsulenet import CapsNet
 import tensorflow as tf
+from Preprocessing.preprocessing import crop_data_from_load2
 
 sys.path.insert(0, os.path.realpath('../'))
 
@@ -37,16 +38,17 @@ else:
 
 #Models to test
 if(not debug):
-    MODEL_METADATA = [("../SavedData/Experiment1Capsnet.h5","Experiment1_Capsnet_4040_Test_Result.npy"),
-                      ("../SavedData/Experiment1CapsnetWeights100100.h5 ", "Experiment1_Capsnet_100100_Test_Result.npy")]
+    MODEL_METADATA = [("../SavedData/Experiment1Capsnet.h5","Experiment1_Capsnet_4040_Test_Result.npy",(40,40)),
+                      ("../SavedData/Experiment1CapsnetWeights100100.h5 ", "Experiment1_Capsnet_100100_Test_Result.npy"),(100,100)]
 else:
     #Debugging data
      MODEL_METADATA =  [("../SavedData/Experiment1CapsnetWeights.h5","Experiment1_Capsnet_Test_Result.npy")]
 
 
 #For each of the models
-for model_file, test_value_save_name in MODEL_METADATA:
+for model_file, test_value_save_name, dims in MODEL_METADATA:
     #Load the model
+    X_test, Y_test = crop_data_from_load2(X_test, Y_test, dims, 2)
     print("Loading the model from {} ...".format(model_file))
 
     if(not debug):
