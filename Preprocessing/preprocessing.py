@@ -253,7 +253,7 @@ def one_hot_encoding(labels):
     return one_hot_encoded_labels
 
 
-def generate_training_and_test_data(directory_path, test_size, train_size, image_selection_percent, same_size=False):
+def generate_training_and_test_data(directory_path, test_size, train_size, image_selection_percent, same_size=False, test_set=False):
     if(same_size):
         images, labels = generate_images_of_same_size(
             directory_path, percent=image_selection_percent)
@@ -263,9 +263,10 @@ def generate_training_and_test_data(directory_path, test_size, train_size, image
 
     labels = np.array(one_hot_encoding(labels)).reshape(-1, 7)
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        images, labels, test_size=test_size, train_size=train_size)
-    return np.array(X_train), np.array(X_test), y_train, y_test
+    if(test_set is True):
+        return np.array(images), labels
+    else:
+        return np.array(X_train), np.array(X_test), y_train, y_test
 
 def crop_data_from_load(X_train, X_test, y_train, y_test, crop_dimensions, number_of_crops):
     cropped_images_train = []
