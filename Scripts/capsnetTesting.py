@@ -38,8 +38,7 @@ else:
 
 #Models to test
 if(not debug):
-    MODEL_METADATA = [("../SavedData/Experiment1Capsnet.h5","Experiment1_Capsnet_4040_Test_Result.npy",(40,40),[40,40,3]),
-                      ("../SavedData/Experiment1CapsnetWeights100100.h5 ", "Experiment1_Capsnet_100100_Test_Result.npy"),(100,100),[100,100,3]]
+    MODEL_METADATA = [("../SavedData/Experiment1CapsnetWeights100100.h5 ", "Experiment1_Capsnet_100100_Test_Result.npy",(100,100),[100,100,3])]
 else:
     #Debugging data
      MODEL_METADATA =  [("../SavedData/Experiment1CapsnetWeights.h5","Experiment1_Capsnet_Test_Result.npy")]
