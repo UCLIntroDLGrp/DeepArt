@@ -9,7 +9,7 @@ import tensorflow as tf
 
 sys.path.insert(0, os.path.realpath('../'))
 
-debug = True
+debug = False
 
 def test(model, data):
     x_test, y_test = data

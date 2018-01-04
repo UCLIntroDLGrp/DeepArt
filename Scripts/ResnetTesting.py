@@ -6,7 +6,7 @@ from keras.models import load_model
 sys.path.insert(0, os.path.realpath('../'))
 
 
-debug=True
+debug=False
 SAVE_DIRECTORY = "../SavedData/"
 
 #Load the test data

@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.realpath('../'))
 
 input_shape = [224,224,3]
 
-debug = True
+debug = False
 
 def test(model, data):
     x_test, y_test = data
