@@ -10,7 +10,7 @@ MODEL_METADATA =[('../SavedData/Experiment1CapsnetWeights100100.h5',"Experiment_
 
 num_classes = 7
 num_routing = 3
-input_shape = [40,40,3]
+input_shape = [100,100,3]
 
 for model_file, figure_save_name in MODEL_METADATA:
     print("Loading the model from {}...".format(model_file))
