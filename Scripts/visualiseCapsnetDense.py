@@ -3,10 +3,10 @@ import sys
 sys.path.insert(0, os.path.realpath('../'))
 from Visualisation.layerVisualisation import visualiseGenericLayer
 from Capsnet.capsulenet import CapsNet
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+#os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
-MODEL_METADATA =[('../SavedData/Experiment1CapsnetWeights.h5',"Experiment_1_Capsnet4040_Output_Visualisation.png")]
+MODEL_METADATA =[('../SavedData/Experiment1CapsnetWeights100100.h5 ',"Experiment_1_Capsnet100100_Output_Visualisation.png")]
 
 num_classes = 7
 num_routing = 3

@@ -38,7 +38,8 @@ else:
 
 #Models to test
 if(not debug):
-    MODEL_METADATA = [("../SavedData/Experiment1CustomNet.h5","Experiment1_CustomNet_Test_Result.npy")]
+    MODEL_METADATA = [("../SavedData/Experiment1CustomNetWeights.h5","Experiment1_CustomNet_No_dropout_Test_Result.npy"),
+                      ("../SavedData/Experiment1CustomNetWeightsWithDropout.h5", "Experiment1_CustomNet_dropout_Test_Result.npy")]
 else:
     #Debugging data
      MODEL_METADATA = [("../SavedData/Experiment1CustomNet.h5","Experiment1_CustomNet_Test_Result.npy")]
