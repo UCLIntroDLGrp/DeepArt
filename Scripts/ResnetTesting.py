@@ -1,10 +1,11 @@
 import sys
 import os
+sys.path.insert(0, os.path.realpath('../'))
 import numpy as np
 from keras.models import load_model
 from Preprocessing.preprocessing import crop_data_from_load2
 
-sys.path.insert(0, os.path.realpath('../'))
+
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "2,3"
 debug=False

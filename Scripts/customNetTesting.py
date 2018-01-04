@@ -8,7 +8,6 @@ from CustomNet.CustomNet import customModel
 import tensorflow as tf
 from Preprocessing.preprocessing import crop_data_from_load2
 
-sys.path.insert(0, os.path.realpath('../'))
 os.environ["CUDA_VISIBLE_DEVICES"] = "2,3"
 debug = False
 

@@ -1,5 +1,6 @@
 import sys
 import os
+sys.path.insert(0, os.path.realpath('../'))
 import numpy as np
 from Capsnet.capsulenet import margin_loss
 from Capsnet.capsnetTesting import getAcc
@@ -7,10 +8,10 @@ from Capsnet.capsulenet import CapsNet
 import tensorflow as tf
 from Preprocessing.preprocessing import crop_data_from_load2
 
-sys.path.insert(0, os.path.realpath('../'))
+
 
 input_shape = [224,224,3]
-os.environ["CUDA_VISIBLE_DEVICES"] = "2,3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"
 debug = False
 
 def test(model, data):
