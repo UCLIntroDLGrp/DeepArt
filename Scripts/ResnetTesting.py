@@ -11,8 +11,8 @@ SAVE_DIRECTORY = "../SavedData/"
 
 #Load the test data
 if(not debug):
-    X_test = np.load("../../../../../ml/2017/DeepArt/SavedData/X_train.npy")
-    Y_test = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_train.npy")
+    X_test = np.load("../../../../../ml/2017/DeepArt/SavedData/X_test.npy")
+    Y_test = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_test.npy")
 else:
     #Debugging data
     X_test = np.load("../SavedData/X_train.npy")

@@ -26,8 +26,8 @@ SAVE_DIRECTORY = "../SavedData/"
 
 #Load the test data
 if(not debug):
-    X_test = np.load("../../../../../ml/2017/DeepArt/SavedData/X_train.npy")
-    Y_test = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_train.npy")
+    X_test = np.load("../../../../../ml/2017/DeepArt/SavedData/X_test.npy")
+    Y_test = np.load("../../../../../ml/2017/DeepArt/SavedData/Y_test.npy")
 else:
     #Debugging data
     X_test = np.load("../SavedData/X_train.npy")
@@ -37,7 +37,8 @@ else:
 
 #Models to test
 if(not debug):
-    MODEL_METADATA = [("../SavedData/Experiment1Capsnet.h5","Experiment1_Capsnet_4040_Test_Result.npy")]
+    MODEL_METADATA = [("../SavedData/Experiment1Capsnet.h5","Experiment1_Capsnet_4040_Test_Result.npy"),
+                      ("../SavedData/Experiment1CapsnetWeights100100.h5 ", "Experiment1_Capsnet_100100_Test_Result.npy")]
 else:
     #Debugging data
      MODEL_METADATA =  [("../SavedData/Experiment1CapsnetWeights.h5","Experiment1_Capsnet_Test_Result.npy")]
