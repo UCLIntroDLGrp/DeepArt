@@ -23,7 +23,6 @@ def test(model, data):
 sys.path.insert(0, os.path.realpath('../'))
 
 
-debug=True
 SAVE_DIRECTORY = "../SavedData/"
 
 #Load the test data

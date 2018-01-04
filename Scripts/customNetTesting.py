@@ -8,6 +8,7 @@ from CustomNet.CustomNet import customModel
 import tensorflow as tf
 from Preprocessing.preprocessing import crop_data_from_load2
 
+
 os.environ["CUDA_VISIBLE_DEVICES"] = "2,3"
 debug = False
 
@@ -17,10 +18,6 @@ def test(model, data):
     return y_pred
 
 
-sys.path.insert(0, os.path.realpath('../'))
-
-
-debug=True
 SAVE_DIRECTORY = "../SavedData/"
 
 input_shape = [224,224,3]
