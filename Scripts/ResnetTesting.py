@@ -22,7 +22,7 @@ else:
 
 #Models to test
 if(not debug):
-    MODEL_METADATA =[ ('../../Experiment2Resnet2.h5',"Experiment2_Resnet_Test_Result.npy"),
+    MODEL_METADATA =[ ('../SavedData/Experiment2Resnet2.h5',"Experiment2_Resnet_Test_Result.npy"),
                     ('../../Experiment1Resnet.h5',"Experiment1_Resnet_Test_Result.npy"),
                       ('../../Experiment2Resnet.h5',"Experiment2_Resnet_Test_Result.npy"),
                      ('../../Experiment3Resnet.h5',"Experiment3_Resenet_Test_Result.npy")]
