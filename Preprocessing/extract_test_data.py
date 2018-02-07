@@ -12,7 +12,6 @@ new_image_directory = '../Test_data/'
 os.makedirs(new_image_directory)
 
 for name, image_list in zip(class_names, images):
-
 	indices = np.arange(len(image_list))
 	
 	random_image_indices = np.random.choice(indices, int(0.1 * len(image_list)), replace=False)

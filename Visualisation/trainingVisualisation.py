@@ -15,6 +15,7 @@ class TrainingTracker(object):
         :param dataLabel: What are the values added
         :return: N/A
         '''
+
         if(dataLabel == None):
             raise ValueError("How do you want me to track data if you don't provide labels for them?")
         elif(not isinstance(dataLabel,str)):
@@ -27,6 +28,7 @@ class TrainingTracker(object):
         Plot the performance metrics.
         :return: N/A
         '''
+
         plt.figure(figsize=(20,20))
         number_of_plots = len(self.valDict.keys())
 

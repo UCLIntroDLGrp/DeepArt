@@ -164,5 +164,4 @@ else:  # as long as weights are given, will run testing
     if args.weights is None:
         print('No weights are provided. Will test using random initialized weights.')
     test(model=model, data=(x_test, y_test))
-
 '''

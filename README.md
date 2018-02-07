@@ -1,4 +1,10 @@
-# DeepArt
+# Deep Art: Learning Artistic Style via Residual and Capsule Networks
+
+## Porject Description:
+
+Please refer to the white paper ```DeepArt_Paper.pdf``` and the poster ```DeepArt_Poster.pdf``` for
+the full details of the project.
+
 
 ## Prerequisites:
 Make sure you install the following on your local machine

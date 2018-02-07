@@ -1,3 +1,10 @@
+###############
+#
+# Adapted from Xifeng Guo's code : `https://github.com/XifengGuo/CapsNet-Keras`
+#
+################
+
+
 """
 Some key layers used for constructing a Capsule Network. These layers can used to construct CapsNet on other dataset,
 not just on MNIST.
@@ -17,7 +24,6 @@ class Length(layers.Layer):
     inputs: shape=[dim_1, ..., dim_{n-1}, dim_n]
     output: shape=[dim_1, ..., dim_{n-1}]
     """
-
     def call(self, inputs, **kwargs):
         return K.sqrt(K.sum(K.square(inputs), -1))
 

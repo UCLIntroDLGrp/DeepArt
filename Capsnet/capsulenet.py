@@ -1,3 +1,9 @@
+###############
+#
+# Adapted from Xifeng Guo's code : `https://github.com/XifengGuo/CapsNet-Keras`
+#
+################
+
 """
 Keras implementation of CapsNet in Hinton's paper Dynamic Routing Between Capsules.
 The current version maybe only works for TensorFlow backend. Actually it will be straightforward to re-write to TF code.

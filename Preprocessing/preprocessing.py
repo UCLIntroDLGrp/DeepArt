@@ -60,6 +60,7 @@ def resize_image(image, scale):
     Returns:
         resized image: a scaled version of the original image
     '''
+
     height, width, _ = np.array(image).shape
     resize_image = image.resize((width / scale, height / scale))
     return resize_image

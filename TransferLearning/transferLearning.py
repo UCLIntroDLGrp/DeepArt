@@ -12,6 +12,7 @@ def refactorOutputs(model, outputs, verbose=False):
     :param verbose: If True will print summary of the model before and after modification
     :return: The model, after the final layer has been replaced
     '''
+
     if (verbose):
         model.summary()
 

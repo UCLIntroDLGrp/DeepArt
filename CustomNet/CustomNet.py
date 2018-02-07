@@ -34,6 +34,7 @@ def customModel(inputShape, num_classes, dropout):
     out_caps = Length(name='out_caps')(digitcaps)
 
     # two-input-two-output keras Model
+
     return models.Model(resnet.input, [out_caps])  # , x_recon
 
 

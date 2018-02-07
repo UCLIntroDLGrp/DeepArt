@@ -20,4 +20,5 @@ def collapseVectors(v):
             number of classes.
     :return: The hot-key vector corresponding to v
     '''
+
     return (v == v.max(axis=1)[:,None]).astype(int)

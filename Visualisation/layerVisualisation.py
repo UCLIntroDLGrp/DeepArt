@@ -15,6 +15,7 @@ def visualiseDenseLayer(model,layer_name,output_classes, verbose, save=False):
     :param verbose: Print statements of progress.
     :return: N/A
     '''
+
     layer_index = utils.find_layer_idx(model, layer_name)
     model.layers[layer_index].activation = activations.linear
     model = utils.apply_modifications(model)
@@ -50,7 +51,7 @@ def visualiseGenericLayer(model,layer_name,output_classes, verbose, save=False):
     :param verbose: Print statements of progress.
     :return: N/A
     '''
-    print("HEEEEREEEEEE")
+
     layer_index = utils.find_layer_idx(model, layer_name)
 
     vis_images = []
@@ -84,6 +85,7 @@ def visualiseCovolutionLayer(model,selected_layer,selected_indices, verbose,save
     :param verbose: Print statements of progress.
     :return: N/A.
     '''
+
     layer_index = utils.find_layer_idx(model, selected_layer)
     vis_images = []
     for filter_index in selected_indices:
